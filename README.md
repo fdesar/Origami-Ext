@@ -5,4 +5,4 @@ More to come.
 
 This is a pre-alpha version, just a draft.
 
-Added local for French
+Added locale for French
