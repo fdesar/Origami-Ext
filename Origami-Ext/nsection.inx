@@ -1,0 +1,36 @@
+<?xrr version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <_name>N-Section</_name>
+    <id>Test</id>
+
+<param name="name" type="notebook">
+    <page name="page_1" _gui-text="Options">
+      <_param name="descrition" type="description" appearance="header">Angle N-Section</_param>
+      <param name="nsec" type="int" min="2" max="20" _gui-text="Sections">1</param>
+    </page>
+    <page name="page_2" _gui-text="Info">
+        <_param name="descrition" type="description" xml:space="preserve">
+Given two lines L1 and L2 crossing point P, divide the salient angle (0-180°) between L1 and L2 in N equal angles.
+        </_param>
+    </page>
+    <page name="page_3" _gui-text="Use">
+        <_param name="descrition" type="description" xml:space="preserve">
+Input: one single segment made of three distinct points, first to second to define L1 and second to third to define L2. 
+
+Output: one to N guides, one per section.
+
+Note: it applies only to the salient angle (0-180°) made by the two lines.
+        </_param>
+    </page>
+</param>
+<effect needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu _name="Origami"/>
+        </effects-menu>
+    </effect>
+    <script>
+        <command reldir="extensions" interpreter="perl">Origami/nsection.pl</command>
+    </script>
+</inkscape-extension>
+
