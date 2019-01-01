@@ -1,0 +1,43 @@
+<?xrr version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <_name>Huzita-4</_name>
+    <id>origami.Huzita4</id>
+
+<param name="name" type="notebook">
+    <page name="page_1" _gui-text="Options">
+      <_param name="descrition" type="description" appearance="header">Huzita4 solver</_param>
+      <param name="clean" type="boolean" _gui-text="Suppress construction segment">false</param>
+    </page>
+    <page name="page_2" xml:space="preserve" _gui-text="Info">
+        <_param name="descrition" type="description" xml:space="preserve">
+Huzita-Hatori axiom 4 statement :
+
+Given a point P1 and a line L1, there is a unique fold perpendicular to L1 that passes through point P1.
+        </_param>
+    </page>
+    <page name="page_3" _gui-text="Use">
+        <_param name="descrition" type="description" xml:space="preserve">
+Input: One single segment made of three points, first beeing P1, second to third defining a segment of L1.
+
+Output: None or one guide showing the fold, if it exists.
+
+Note: if the fold runs outside the defined segment of L1, there will be no solution.
+        </_param>
+    </page>
+<!--
+    <page name="page_4" gui-text="Debug">
+        <param name="debug" type="boolean" gui-text="Verbose">false</param>
+    </page>
+-->
+</param>
+<effect needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu _name="Origami"/>
+        </effects-menu>
+    </effect>
+    <script>
+        <command reldir="extensions" interpreter="perl">Origami/huzita4.pl</command>
+    </script>
+</inkscape-extension>
+

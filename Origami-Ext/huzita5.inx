@@ -1,0 +1,71 @@
+<?xrr version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <_name>Huzita-5</_name>
+    <id>origami.Huzita5</id>
+<!--
+    <dependency type="executable" location="extensions">Origami/Origami.pm</dependency>
+    <dependency type="executable" location="extensions">Origami/huzita5.pl</dependency>
+-->
+
+<param name="name" type="notebook">
+    <page name="page_1" gui-text="Options">
+        <param name="descrition" type="description" appearance="header">Huzita-Hatori 5</param>
+        <param name="proj" type="boolean" gui-text="Draw projections">true</param>
+        <param name="clean" type="boolean" gui-text="Suppress construction segments">true</param>
+    </page>
+    <page name="page_2" gui-text="Advanced">
+        <param name="drawp" type="boolean" _gui-text="Draw construction">false</param>
+        <param name="pscale" type="int" min="1" max="50" _gui-text="Scale">2</param>
+    </page>
+    <page name="page_3" gui-text="Projections">
+        <param name="descrition" type="description" appearance="header">Stroke width</param>
+        <param name="psize" type="float" precision="3" gui-text="Size">1</param>
+        <param name="punit" type="enum" xml:space="preserve" gui-text="Unit                                     ">
+          <item value="px">px</item>
+          <item value="pt">pt</item>
+          <item value="pc">pc</item>
+          <item value="in">in</item>
+          <item value="mm">mm</item>
+          <item value="cm">cm</item>
+        </param>
+        <param name="descrition" type="description" appearance="header">Stroke color</param>
+        <param name="pcolor" type="color">16711935</param>
+    </page>
+    <page name="page_4" _gui-text="Info">
+        <_param name="descrition" type="description" xml:space="preserve">
+Huzita-Hatori axiom 5 statement :
+
+Given two points P1 and P2 and a line L1, there is a fold
+that places P1 onto L1 and passes through P2.
+        </_param>
+    </page>
+    <page name="page_5" gui-text="Use">
+        <_param name="descrition" type="description" xml:space="preserve">
+Input: One single segment made of four distinct points, first and second beeing respectively P2 and P1, third to fourth defining a segment of L1.
+
+Output : None to two guides giving the possible folds, if one exists, and optionally, the projection segments of P1 onto L1 and/or the parabola P1->L1 computed to get the solutions (it may be helpful to understand why there is no or more than one solution as it will always be drawn if requested).
+
+
+Note 1: only folds projecting P1 onto the defined segment of L1 will be draw and if there is more than one possible fold, a warning message will be issued to remind you you'll need to remove or ignore the unwanted one.
+
+Note 2: if you choose to draw the projections, you can both choose their color and stroke size. 
+        </_param>
+    </page>
+<!--
+    <page name="page_6" gui-text="Debug">
+        <param name="debug" type="boolean" gui-text="Verbose">false</param>
+    </page>
+-->
+</param>
+
+    <effect needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu _name="Origami"/>
+        </effects-menu>
+    </effect>
+    <script>
+        <command reldir="extensions" interpreter="perl">Origami/huzita5.pl</command>
+    </script>
+</inkscape-extension>
+

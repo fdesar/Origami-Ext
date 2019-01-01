@@ -1,0 +1,64 @@
+<?xrr version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <_name>Huzita-7</_name>
+    <id>origami.Huzita7</id>
+
+<param name="name" type="notebook">
+    <page name="page_1" _gui-text="Options">
+      <_param name="descrition" type="description" appearance="header">Huzita7 solver</_param>
+      <param name="proj" type="boolean" _gui-text="Draw projections">true</param>
+      <param name="clean" type="boolean" _gui-text="Suppress construction segment">true</param>
+    </page>
+    <page name="page_2" _gui-text="Advanced">
+      <param name="drawp" type="boolean" _gui-text="Draw construction">false</param>
+      <param name="pscale" type="int" min="1" max="50" _gui-text="Scale">1</param>
+    </page>
+    <page name="page_3" _gui-text="Projections">
+        <_param name="descrition" type="description" appearance="header">Stroke width</_param>
+        <param name="psize" type="float" precision="3" _gui-text="Size">2</param>
+        <param name="punit" type="enum" xml:space="preserve" _gui-text="Unit                                                                           ">
+          <item value="px">px</item>
+          <item value="pt">pt</item>
+          <item value="pc">pc</item>
+          <item value="in">in</item>
+          <item value="mm">mm</item>
+          <item value="cm">cm</item>
+        </param>
+        <_param name="descrition" type="description" appearance="header">Stroke color</_param>
+        <param name="pcolor" type="color">16711935</param>
+    </page>
+    <page name="page_4" _gui-text="Info">
+        <_param name="descrition" type="description" xml:space="preserve">
+Huzita-Hatori-Justin axiom 7 statement :
+
+Given one point P and two lines L1 and L2, there is a fold that places P onto L1 and is perpendicular to L2.
+        </_param>
+    </page>
+    <page name="page_5" _gui-text="Use">
+        <_param name="descrition" type="description" xml:space="preserve">
+Input: One single segment made of 5 distinct points, first to second delimiting a segment of line L1, third beeing the point P, fourth to fith delimiting a segment of L2. Point P cannot be on line L2. 
+
+Output: None or one guide, giving the possible fold if it exists and optionally the projection segment of P onto L2 and/or the parabola P->L2 computed to get the solution (it may be helpful to understand why there is no solution as it will always be drawn if requested). 
+
+Note 1: only folds projecting P onto the delimited segment of L2 and crossing L1 in its delemited segment will be draw.
+
+Note 2: if you choose to draw the projection, you can both choose its color and stroke size.
+        </_param>
+    </page>
+<!--
+    <page name="page_6" _gui-text="Debug">
+        <param name="debug" type="boolean" gui-text="Verbose">false</param>
+    </page>
+-->
+</param>
+<effect needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu _name="Origami"/>
+        </effects-menu>
+    </effect>
+    <script>
+        <command reldir="extensions" interpreter="perl">Origami/huzita7.pl</command>
+    </script>
+</inkscape-extension>
+

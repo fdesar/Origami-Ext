@@ -1,0 +1,48 @@
+<?xrr version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <_name>Huzita-3</_name>
+    <id>origami.Huzita3</id>
+
+<param name="name" type="notebook">
+    <page name="page_1" _gui-text="Options">
+      <_param name="descrition" type="description" appearance="header">HuzitaHatori Axiom 3 solver</_param>
+      <param name="clean" type="boolean" _gui-text="Suppress construction segment">true</param>
+    </page>
+    <page name="page_2" _gui-text="Info">
+        <_param name="descrition" type="description" xml:space="preserve">
+Huzita-Hatori axiom 3 statement :
+
+Given two lines L1 and L2, there is a unique fold that places L1 onto L2.
+        </_param>
+    </page>
+    <page name="page_3" _gui-text="Use">
+        <_param name="descrition" type="description" xml:space="preserve">
+Input: One single segment made of either:
+  - 3 distinct points, first to second, distinct, defining a segment of L1, second to third, distinct, defining a segment of L2.
+  - 4 points, first to second, distinct, defining a segment of L1, third and fourth, distinct, defining a segment of L2.
+
+Output: One single guide showing the fold (see note).
+
+
+Note 1: if L1 and L2 intersect inside their defined segments then two folds are possible: a warning message will be issued and two guides will be drawn.
+
+Note 2: L1 and L2 can be either parallel or secant.
+        </_param>
+    </page>
+<!--
+    <page name="page_4" gui-text="Debug">
+        <param name="debug" type="boolean" gui-text="Verbose">false</param>
+    </page>
+-->
+</param>
+<effect needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu _name="Origami"/>
+        </effects-menu>
+    </effect>
+    <script>
+        <command reldir="extensions" interpreter="perl">Origami/huzita3.pl</command>
+    </script>
+</inkscape-extension>
+

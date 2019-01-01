@@ -1,0 +1,43 @@
+<?xrr version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <_name>Rabbit-Ear</_name>
+    <id>origami.Rabbit-Ear</id>
+
+<param name="name" type="notebook">
+    <page name="page_1" _gui-text="Options">
+      <_param name="descrition" type="description" appearance="header">Rabbit-Ear solver</_param>
+      <param name="clean" type="boolean" _gui-text="Suppress construction segment">true</param>
+    </page>
+    <page name="page_2" _gui-text="Info">
+        <_param name="descrition" type="description" xml:space="preserve">
+Given three crease lines L1, L2, L3 all crossing on point P not located on a raw edge, find the complementary crease line L4 crossing point P that allows the paper to lie flat while simultaneously folding all the creases.
+
+If one of the angle L1-L2, L2-L3 or L3-L1 is greater than 180° then there is only one solution, located in the quadrant between the two crease lines that make this angle. Othewise, there are 3 solutions, one between each consecutive crease lines.
+        </_param>
+    </page>
+    <page name="page_3" _gui-text="Use">
+        <_param name="descrition" type="description" xml:space="preserve">
+Input: One single segment made of 5 distinct points, first beeing the crossing point P, next three lying respectively on each of the three creases lines running from it and last one located anywhere in the quadrant in which you wish to get the fold.
+
+Output: one guide showing the complementary angle.
+
+Note: if there is only one possible solution and it doesn't lie in the requested quadrant, a warning message will be issued and this sole solution will be shown.
+        </_param>
+    </page>
+<!--
+    <page name="page_3" gui-text="Debug">
+        <param name="debug" type="boolean" gui-text="Verbose">false</param>
+    </page>
+-->
+</param>
+<effect needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu _name="Origami"/>
+        </effects-menu>
+    </effect>
+    <script>
+        <command reldir="extensions" interpreter="perl">Origami/rabbitear.pl</command>
+    </script>
+</inkscape-extension>
+

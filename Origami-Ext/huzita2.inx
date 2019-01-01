@@ -1,0 +1,41 @@
+<?xrr version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <_name>Huzita-2</_name>
+    <id>origami.Huzita2</id>
+
+<param name="name" type="notebook">
+    <page name="page_1" _gui-text="Options">
+    <_param name="descrition" type="description" appearance="header">Huzita-Hatori Axiom 2 solver</_param>
+      <param name="clean" type="boolean" _gui-text="Suppress construction segment">true</param>
+    </page>
+    <page name="page_2" _gui-text="Info">
+        <_param name="descrition" type="description" xml:space="preserve">
+Huzita-Hatori axiom 2 statement :
+
+Given two points P1 and P2, there is a unique fold that places P1 onto P2.
+        </_param>
+    </page>
+    <page name="page_3" _gui-text="Use">
+        <_param name="descrition" type="description" xml:space="preserve">
+Input : One single segment made of two distinct points, one for each point P1 and P2.
+
+Output : One single guide showing the fold.
+        </_param>
+    </page>
+<!--
+    <page name="page_4" _gui-text="Debug">
+        <param name="debug" type="boolean" _gui-text="Debugging">false</param>
+    </page>
+-->
+</param>
+<effect needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu _name="Origami"/>
+        </effects-menu>
+    </effect>
+    <script>
+        <command reldir="extensions" interpreter="perl">Origami/huzita2.pl</command>
+    </script>
+</inkscape-extension>
+
