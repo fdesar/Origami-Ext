@@ -2,7 +2,7 @@ package OriMath;
 
 use strict;
 use warnings;
-use Math::Trig qw/pi/;
+use Math::Trig;
 
 # Compare if two floating point values are equal with a 7 decimals precision
 sub Equals {
@@ -192,7 +192,7 @@ sub DistinctPoints {
 
 package OriMath::Vec;
 
-use Math::Trig qw/pi/;
+use Math::Trig;
 
 sub new {
   my($class)=shift;
@@ -372,7 +372,7 @@ sub Print {
 
 package OriMath::Parabola;
 
-use Math::Trig qw/pi/;
+use Math::Trig;
 
 sub new {
   my($class)=shift;

@@ -1,4 +1,3 @@
-and die gettext("ONE segment made of TWO points should be selected.")."\n";
 #!/usr/bin/perl
 
 
