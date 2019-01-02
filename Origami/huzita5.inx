@@ -18,9 +18,9 @@
         <param name="pscale" type="int" min="1" max="50" _gui-text="Scale">2</param>
     </page>
     <page name="page_3" gui-text="Projections">
-        <param name="descrition" type="description" appearance="header">Stroke width</param>
+        <_param name="descrition" type="description" appearance="header">Stroke width</_param>
         <param name="psize" type="float" precision="3" gui-text="Size">1</param>
-        <param name="punit" type="enum" xml:space="preserve" gui-text="Unit                                     ">
+        <param name="punit" type="enum" gui-text="                                                                                  ">
           <item value="px">px</item>
           <item value="pt">pt</item>
           <item value="pc">pc</item>
@@ -28,7 +28,7 @@
           <item value="mm">mm</item>
           <item value="cm">cm</item>
         </param>
-        <param name="descrition" type="description" appearance="header">Stroke color</param>
+        <_param name="descrition" type="description" appearance="header">Stroke color</_param>
         <param name="pcolor" type="color">16711935</param>
     </page>
     <page name="page_4" _gui-text="Info">
