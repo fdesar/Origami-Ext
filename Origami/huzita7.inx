@@ -16,7 +16,7 @@
     <page name="page_3" _gui-text="Projections">
         <_param name="descrition" type="description" appearance="header">Stroke width</_param>
         <param name="psize" type="float" precision="3" _gui-text="Size">2</param>
-        <param name="punit" type="enum" xml:space="preserve" gui-text="                                                                                  ">
+        <param name="punit" type="enum" gui-text="                                                                                  ">
           <item value="px">px</item>
           <item value="pt">pt</item>
           <item value="pc">pc</item>
