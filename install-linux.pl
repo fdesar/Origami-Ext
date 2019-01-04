@@ -159,4 +159,4 @@ and do {
   ExecCmd("rm $localedir/inkscape.po");
 };
 
-print "Installation completed successfully.\";
+print "Installation completed successfully.\n";
