@@ -12,5 +12,7 @@ And more to come...
 
 Help needed for everything as tranlating, improving, debugging, correcting typos, installation on other OSes, doc writing... and more!
 
+Feed back welcome.
+
 Enjoy!
 
