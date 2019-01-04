@@ -1,0 +1,131 @@
+
+
+Installation of the Origami-Ext extension on a Linux System
+
+
+
+1/Pre-requisite :
+
+- Perl (5.18 or newer)
+
+- Perl Modules :
+
+  - XML-LibXML
+  - XML-NamespaceSupport
+  - XML-SAX-Base
+  - XML-SAX
+
+Linux package name :
+
+  libxml-libxml-perl
+
+- If you want I18n (internationalization support) :
+
+  - GNU gettext utilities
+
+  - Perl Module :
+
+    - Local::gettext
+
+  Linux package names are :
+
+  liblocale-gettext-perl
+  gettext
+
+
+2/ Installation
+
+  2.1 Basics
+
+    2.1.1 User installation
+
+    Been located into the Origami-Ext directory, do the following:
+
+       - Locate your local Inkscape directory (assuming it is ~/<username>/.config/inkscape, but it may vary)
+
+	- Issue the following bash commands :
+
+          $ rdir=~/.config/inkscape/extensions
+          $ ldir=`pwd`
+          $ ln -s $ldir/Origami $rdir/Origami
+          $ (cd $rdir; ln -s ./Origami/*.inx .)
+
+
+        - And your done.
+
+    2.1.2 System wide installation
+
+    It is just like for local user installation, except you'll need to sudo and use system wide inscape directory:
+
+    Been located into the Origami-Ext directory, do the following:
+
+       - Locate your system wide Inkscape directory (assuming /usr/share/inkscape but it may vary)
+
+	- Issue the following bash commands :
+
+          $ rdir=/usr/share/inkscape/extensions
+          $ ldir=`pwd`
+          $ sudo ln -s $ldir/Origami $rdir/Origami
+          $ (cd $rdir; sudo ln -s ./Origami/*.inx .)
+
+        - And your done, the extension is ready for use. You'll find the modules under the menu 'Extensions' in
+          a sub-section called 'Origami' (surprising, isn't it ?)
+
+
+
+
+  2.2 Internationalization
+
+
+  The first thing needed is that a translation exists for your given locale.
+  To check it, look into the I18n directory: if there exists a two letter subdirectory
+  corresponding to your locale, it means there should be a translation for it.
+
+  Then there are two distinct parts for it to work :
+
+     
+    a. The messages from the scripts themselves
+
+       This is the easy part : just make sure the needed Perl module Locale::gettext is
+       installed and it should work out-of-the-box. Nothing more to do.
+
+
+    b. The content of the Inkscape extention files
+
+       As this Inkscape extension is not an official, you will need to merge the translated
+       messages with the already existing Inkscape messages.
+
+       To do so, you will first need to have the GNU Gettext utilities installed, which is
+       fortunatly the case for most Linux distributions.
+
+	Then , in the I18n/<your_locale> directory, you should find a file called 
+        origami-ext.po : this is the file you will have to add to your inkscape.po file
+        but it can only be done system wide, so you will need to sudo somewhere and be
+        careful to backup the original file. This how to do :
+
+        - Locate the system locale directory, usually on most system,
+          /usr/share/locale/<your_locale>/LC_MESSAGES
+          and make a backup copy of the inkscape.mo message file :
+
+          $ localedir=/usr/share/locale/<your_locale>/LC_MESSAGES
+          $ (cd $localedir; sudo cp inkscape.mo inkscape-orig.mo)
+
+        - Then, as it is in compressed form, we will need to uncompress it using the
+          msgunfmt utility coming with the GNU gettext package :
+
+          $ (cd $localedir; sudo msgunfmt -o inkscape.po inkscape.mo)
+
+        - Then cd into the I18n/locale/<your_locale> directory and after making sure the Origami-Ext.po
+          is in there (double check !!), issue the following command :
+
+          $ origamiext=`pwd`/Origami-Ext.po
+          $ (cd $localedir; sudo msgcat --use-first -o inkscape.po inkscape.po $origamiext)
+
+        - The two files are now merged into the new inkscape.po and we just need to recompress it
+          for it to work by typing :
+
+          $ (cd $localedir; sudo msgfmt -o inkscape.mo inkscape.po; sudo rm inkscape.po)
+
+          and your done ! The extensions should be now fully translated in your locale.
+
+ 

@@ -19,7 +19,7 @@
     </page>
     <page name="page_3" _gui-text="Projections">
         <_param name="descrition" type="description" appearance="header">Stroke width</_param>
-        <param name="psize" type="float" precision="3" _gui-text="Size">1</param>
+        <param name="psize" type="float" precision="3" gui-text=" ">1</param>
         <param name="punit" type="enum" gui-text="                                                                                  ">
           <item value="px">px</item>
           <item value="pt">pt</item>
@@ -35,8 +35,7 @@
         <_param name="descrition" type="description" xml:space="preserve">
 Huzita-Hatori axiom 6 statement :
 
-Given two points P1 and P2 and two lines L1 and L2, there is a fold that places P1 onto L1 and P2 onto L2.
-        </_param>
+Given two points P1 and P2 and two lines L1 and L2, there is a fold that places P1 onto L1 and P2 onto L2.</_param>
     </page>
     <page name="page_5" _gui-text="Use">
         <_param name="descrition" type="description" xml:space="preserve">
@@ -47,8 +46,7 @@ Output : None to three guides giving the possible folds, if one exists, and opti
 
 Note 1: only folds projecting both P1 and P2 onto their respective delimited segments of L1 and L2 will be drawn and if there is more than one possible fold, a warning message will be issued to remind you you'll need to remove or ignore the unwanted ones.
 
-Note 2: if you choose to draw the projections, you can choose both their color and stroke size.
-        </_param>
+Note 2: if you choose to draw the projections, you can choose both their color and stroke size.</_param>
     </page>
 <!--
     <page name="page_6" _gui-text="Debug">

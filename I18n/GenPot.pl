@@ -55,8 +55,8 @@ $mess_root=$inkscape_root.'/../share/locale';
 
 sub Init {
   # First, verify we are located in the right place
-      (-d "$cur_dir/../I18n" and -d "$cur_dir/../Origami-Ext")
-  or  die "This utility should be located in the Inkscape-Ext/I18n extension directory\n";
+      (-d "$cur_dir/../I18n" and -d "$cur_dir/../Origami")
+  or  die "This utility should be located in the Origami-Ext/I18n extension directory\n";
 
   # Copy inkscape.mo to inkscape-orig.mo for each supported locale
   for my $ling (@LINGUAE) {
@@ -72,8 +72,8 @@ sub Init {
 }
 
 sub GenInxPot {
-  my($potfile)="$cur_dir/Inkscape-Ext.pot";
-  my(@inx)=<../Origami-Ext/*.inx>;
+  my($potfile)="$cur_dir/Origami-Ext.pot";
+  my(@inx)=<../Origami/*.inx>;
   my(%msg);
   my($dom);
 
@@ -131,7 +131,7 @@ sub GenInxPot {
 
 sub GenScriptPot {
   my($potfile)="$cur_dir/Origami.pot";
-  my(@inx)=(<../Origami-Ext/*.pl>, <../Origami-Ext/*.pm>);
+  my(@inx)=(<../Origami/*.pl>, <../Origami/*.pm>);
   my(%msg);
 
   my $WritePot = sub {
