@@ -10,8 +10,7 @@ It has localization fully implemented and the French translation is already avai
 
 And more to come...
 
-Help needed for everything as tranlating, improving, debugging, correcting typos, installation on other OSes and evreything
-else.
+Help needed for everything as tranlating, improving, debugging, correcting typos, installation on other OSes, doc writing... and evrything else!
 
 Enjoy!
 
