@@ -12,8 +12,7 @@
         <_param name="descrition" type="description" xml:space="preserve">
 Given three crease lines L1, L2, L3 all crossing on point P not located on a raw edge, find the complementary crease line L4 crossing point P that allows the paper to lie flat while simultaneously folding all the creases.
 
-If one of the angle L1-L2, L2-L3 or L3-L1 is greater than 180° then there is only one solution, located in the quadrant between the two crease lines that make this angle. Othewise, there are 3 solutions, one between each consecutive crease lines.
-        </_param>
+If one of the angle L1-L2, L2-L3 or L3-L1 is greater than 180° then there is only one solution, located in the quadrant between the two crease lines that make this angle. Othewise, there are 3 solutions, one between each consecutive crease lines.</_param>
     </page>
     <page name="page_3" _gui-text="Use">
         <_param name="descrition" type="description" xml:space="preserve">
@@ -21,8 +20,7 @@ Input: One single segment made of 5 distinct points, first beeing the crossing p
 
 Output: one guide showing the complementary angle.
 
-Note: if there is only one possible solution and it doesn't lie in the requested quadrant, a warning message will be issued and this sole solution will be shown.
-        </_param>
+Note: if there is only one possible solution and it doesn't lie in the requested quadrant, a warning message will be issued and this sole solution will be shown.</_param>
     </page>
 <!--
     <page name="page_3" gui-text="Debug">

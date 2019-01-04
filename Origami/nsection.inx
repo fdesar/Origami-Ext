@@ -10,8 +10,7 @@
     </page>
     <page name="page_2" _gui-text="Info">
         <_param name="descrition" type="description" xml:space="preserve">
-Given two lines L1 and L2 crossing point P, divide the salient angle (0-180°) between L1 and L2 in N equal angles.
-        </_param>
+Given two lines L1 and L2 crossing point P, divide the salient angle (0-180°) between L1 and L2 in N equal angles.</_param>
     </page>
     <page name="page_3" _gui-text="Use">
         <_param name="descrition" type="description" xml:space="preserve">
@@ -19,8 +18,7 @@ Input: one single segment made of three distinct points, first to second to defi
 
 Output: one to N guides, one per section.
 
-Note: it applies only to the salient angle (0-180°) made by the two lines.
-        </_param>
+Note: it applies only to the salient angle (0-180°) made by the two lines.</_param>
     </page>
 </param>
 <effect needs-live-preview="true">

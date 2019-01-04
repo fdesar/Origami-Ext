@@ -12,8 +12,7 @@
         <_param name="descrition" type="description" xml:space="preserve">
 Huzita-Hatori axiom 4 statement :
 
-Given a point P1 and a line L1, there is a unique fold perpendicular to L1 that passes through point P1.
-        </_param>
+Given a point P1 and a line L1, there is a unique fold perpendicular to L1 that passes through point P1.</_param>
     </page>
     <page name="page_3" _gui-text="Use">
         <_param name="descrition" type="description" xml:space="preserve">
@@ -21,8 +20,7 @@ Input: One single segment made of three points, first beeing P1, second to third
 
 Output: None or one guide showing the fold, if it exists.
 
-Note: if the fold runs outside the defined segment of L1, there will be no solution.
-        </_param>
+Note: if the fold runs outside the defined segment of L1, there will be no solution.</_param>
     </page>
 <!--
     <page name="page_4" gui-text="Debug">

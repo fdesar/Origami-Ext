@@ -12,8 +12,7 @@
         <_param name="descrition" type="description" xml:space="preserve">
 Huzita-Hatori axiom 1 statement :
 
-Given two points P1 and P2, there is a unique fold that passes through both of them.
-        </_param>
+Given two points P1 and P2, there is a unique fold that passes through both of them.</_param>
     </page>
     <page name="page_3" _gui-text="Use">
         <_param name="descrition" type="description" xml:space="preserve">
@@ -22,8 +21,7 @@ Input : One single segment made of two distinct points, one for each point P1 an
 Output : One single guide showing the fold.
 
 
-Note: As the solution is the input segment itself, this extension is merely a joke written only to complete the full set of Hatori-Huzita axioms.
-        </_param>
+Note: As the solution is the input segment itself, this extension is merely a joke written only to complete the full set of Hatori-Huzita axioms.</_param>
     </page>
 <!--
     <page name="page_4" gui-text="Debug">

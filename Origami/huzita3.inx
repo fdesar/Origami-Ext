@@ -12,8 +12,7 @@
         <_param name="descrition" type="description" xml:space="preserve">
 Huzita-Hatori axiom 3 statement :
 
-Given two lines L1 and L2, there is a unique fold that places L1 onto L2.
-        </_param>
+Given two lines L1 and L2, there is a unique fold that places L1 onto L2.</_param>
     </page>
     <page name="page_3" _gui-text="Use">
         <_param name="descrition" type="description" xml:space="preserve">
@@ -26,8 +25,7 @@ Output: One single guide showing the fold (see note).
 
 Note 1: if L1 and L2 intersect inside their defined segments then two folds are possible: a warning message will be issued and two guides will be drawn.
 
-Note 2: L1 and L2 can be either parallel or secant.
-        </_param>
+Note 2: L1 and L2 can be either parallel or secant.</_param>
     </page>
 <!--
     <page name="page_4" gui-text="Debug">

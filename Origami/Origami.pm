@@ -60,8 +60,8 @@ sub gettext {
 eval {
   require Locale::gettext;
   Locale::gettext->import();
-  bindtextdomain("Origami", dirname(abs_path(__FILE__))."/locale");
-  textdomain("Origami");
+  textdomain('Origami');
+  bindtextdomain('Origami', dirname(abs_path(__FILE__))."/locale");
 };
 #-------------------------------------------
 

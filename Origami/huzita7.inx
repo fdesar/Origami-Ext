@@ -15,7 +15,7 @@
     </page>
     <page name="page_3" _gui-text="Projections">
         <_param name="descrition" type="description" appearance="header">Stroke width</_param>
-        <param name="psize" type="float" precision="3" _gui-text="Size">2</param>
+        <param name="psize" type="float" precision="3" gui-text=" ">1</param>
         <param name="punit" type="enum" gui-text="                                                                                  ">
           <item value="px">px</item>
           <item value="pt">pt</item>
@@ -31,8 +31,7 @@
         <_param name="descrition" type="description" xml:space="preserve">
 Huzita-Hatori-Justin axiom 7 statement :
 
-Given one point P and two lines L1 and L2, there is a fold that places P onto L1 and is perpendicular to L2.
-        </_param>
+Given one point P and two lines L1 and L2, there is a fold that places P onto L1 and is perpendicular to L2.</_param>
     </page>
     <page name="page_5" _gui-text="Use">
         <_param name="descrition" type="description" xml:space="preserve">
@@ -42,8 +41,7 @@ Output: None or one guide, giving the possible fold if it exists and optionally 
 
 Note 1: only folds projecting P onto the delimited segment of L2 and crossing L1 in its delemited segment will be draw.
 
-Note 2: if you choose to draw the projection, you can both choose its color and stroke size.
-        </_param>
+Note 2: if you choose to draw the projection, you can both choose its color and stroke size.</_param>
     </page>
 <!--
     <page name="page_6" _gui-text="Debug">
