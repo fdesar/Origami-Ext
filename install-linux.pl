@@ -11,19 +11,14 @@ use Config;
     $Config{osname} ne 'linux'
 and die "Sorry, you're not on a Linux system. Aborting installation.\n";
 
+    $>
+and die "You must sudo to run this script. Aborting installation.\n";
+
 my($oripo)='Origami.po';
 my($oriextpo)='Origami-Ext.po';
-
-my($lang);
-my($inst_type);
 my($pwd)=dirname(abs_path(__FILE__));
-my($langdir)="$pwd/I18n/locale/";
-my($home)=$ENV{HOME};
-my($uid)=(stat __FILE__)[4];
-my($user)=(getpwuid $uid)[0];
 my($exedir);
 my($extdir);
-my($localedir);
 
 
 sub Prompt {
@@ -65,98 +60,186 @@ sub FindExecDir {
 sub ExecCmd {
   my($cmd)=shift;
 
-  # print "$cmd\n";
+  #  print "$cmd\n";
   system $cmd;
 }
 
-    $exedir = FindExecDir('inkscape')
-or  die "Cannot find inkscape executable in \$PATH (is Inkscape installed ?). Aborting installation.\n";
+sub Prepare {
+  my($dpkg)=FindExecDir('dpkg');
+  my($aptupdate)=0;
 
-    eval { require XML::LibXML }
-or  die "You should first install Lib::LibXML for Perl. Aborting installation.\n";
+  my $InstModule = sub {
+    my($name)=shift;
+    my($pkg)=shift;
 
-$lang=substr(setlocale(LC_MESSAGES),0,2);
-#$lang='de';
-$langdir .= $lang;
+        eval "require $name"
+    or  do {
+          $dpkg
+      or  die "Perl module $name not installed and your system doen't use dpkg : you'll have to install it yourself. Aborting Installation.\n"; 
 
-   (    -d $langdir
-    and -f "$langdir/$oripo"
-    and -f "$langdir/$oriextpo")
-or  $langdir="";
+          Prompt("Perl module $name not installed. Do you want me to install it ? [Y/n] : ","YN") eq 'Y'
+      and do {
+        my($stdout, $err);
 
-if($langdir) {
-  my($has_gettext);
-  print "Translation found for your language '$lang'";
-  $has_gettext=FindExecDir('gettext');
+              $aptupdate
+        or  do {
+          print "Doing apt-update... ";
+          $stdout=`apt-get update 2>&1`;
+              ($?>>8) != 0
+          and die "failed: \n$stdout\n\nAborting installation.\n";
+          ++$aptupdate;
+          print "done.\n";
+        };
 
-  if($has_gettext) {
-    print " and GNU gettext available.\n";
-  }
-  else {
-    $lang=$langdir='';
-    print " but GNU gettext not available.";
-        Prompt(" Install without translation anyway [y/N] ?",'NY') ne 'Y'
-    and die "Aborting installation.\n";
-  }
+        print "Installing or updating package: '$pkg'... ";
+
+        $stdout=`apt-get -qy install $pkg 2>&1`;
+            ($?>>8) != 0
+        and die "failed: \n$stdout\n\nAborting installation.\n";
+
+        print "done.\n";
+   
+      };
+
+          eval "require $name"
+      or  die "Perl module $name not availaible. Aborting installation.\n";
+    };
+
+  };
+
+
+      $exedir = FindExecDir('inkscape')
+  or  die "Cannot find inkscape executable in \$PATH : is Inkscape installed ? Aborting installation.\n";
+
+  $extdir = "$exedir/../share/inkscape/extensions";
+      -d  $extdir
+  or  die "Something seems wrong : cannot find Inkscape extensions directory!. Aborting installation.)\n";
+
+  &$InstModule("XML::LibXML",'libxml-libxml-perl');
+  &$InstModule("Locale::gettext",'liblocale-gettext-perl');
+}
+
+sub Install {
+
+    my $InstallExtension = sub {
+        not -d "$extdir/Origami"
+    and ExecCmd("mkdir $extdir/Origami");
+
+    ExecCmd("cp $pwd/Origami/*.pm $extdir/Origami");
+    ExecCmd("cp $pwd/Origami/*.pl $extdir/Origami");
+    ExecCmd("cp $pwd/Origami/*.inx $extdir");
+  };
+
+  my $InstallLocales = sub {
+
+    my $InstallLocale = sub {
+      my($lang)=shift;
+      my($srcdir)="$pwd/I18n/locale/$lang";
+      my($localedir)="$exedir/../share/locale/$lang/LC_MESSAGES";
+      # Extension Messages
+
+          not -d "$extdir/Origami/locale/$lang"
+      and ExecCmd("mkdir $extdir/Origami/locale/$lang");
+
+          not -d "$extdir/Origami/locale/$lang/LC_MESSAGES"
+      and ExecCmd("mkdir $extdir/Origami/locale/$lang/LC_MESSAGES");
+
+      ExecCmd("msgfmt -o $extdir/Origami/locale/$lang/LC_MESSAGES/Origami.mo $srcdir/$oripo");
+
+      # Inkscape Messages
+
+      # If re-install, restore original inkscape.mo file
+          -e  "$localedir/inkscape-orig.mo"
+      and ExecCmd("cp $localedir/inkscape-orig.mo $localedir/inkscape.mo");
+
+      ExecCmd("cp $localedir/inkscape.mo $localedir/inkscape-orig.mo");
+      ExecCmd("msgunfmt -o $localedir/inkscape.po $localedir/inkscape.mo");
+      ExecCmd("msgcat --use-first -o $localedir/inkscape.po $localedir/inkscape.po $srcdir/$oriextpo");
+      ExecCmd("msgfmt -o $localedir/inkscape.mo $localedir/inkscape.po");
+      ExecCmd("rm $localedir/inkscape.po");
+
+    };
+
+        not -d "$extdir/Origami/locale"
+    and ExecCmd("mkdir $extdir/Origami/locale");
+
+    my(@locales)=map { substr($_,-2,2) } <$pwd/I18n/locale/*>;
+
+    for my $locale (@locales) {
+
+
+      # Does this locale exists for inkscape and
+      # fully exists for Origami-Ext ?
+         (    -f "$exedir/../share/locale/$locale/LC_MESSAGES/inkscape.mo"
+          and -f "$pwd/I18n/locale/$locale/$oripo"
+          and -f "$pwd/I18n/locale/$locale/$oriextpo")
+      or  next;
+      &$InstallLocale($locale);
+    }
+
+
+  };
+
+  &$InstallExtension();
+  &$InstallLocales();
 
 }
-else {
-  warn "\nSorry, no translation available for your current language '$lang'.\n\n";
-  $lang='';
+
+sub Remove {
+  my(@locales);
+  my(@modules);
+
+
+  # First, restore inkscape.mo in each locale
+  @locales=map { substr($_,-2,2) } <$pwd/I18n/locale/*>;
+  for my $locale (@locales) {
+    my($localedir)="$exedir/../share/locale/$locale/LC_MESSAGES";
+        -f "$localedir/inkscape-orig.mo"
+    and ExecCmd("mv $localedir/inkscape-orig.mo $localedir/inkscape.mo");
+  }
+  # Now remove .inx from .pl list
+  @modules=<$extdir/Origami/*.pl>;
+  for my $module (@modules) {
+    $module =~ s|Origami/||;
+    $module =~ s/\.pl$/.inx/;
+    ExecCmd("rm $module");
+  }
+  # Finally remove Origami from extension dir
+  ExecCmd("rm -r $extdir/Origami");
 }
 
-$localedir="$exedir/../share/locale/$lang/LC_MESSAGES";
+# Main()
 
-    $lang
-and (not -d $localedir or not -f "$localedir/inkscape.mo")
-and die "Cannot find Inkscape translation messages for '$lang'. Aborting installation.\n";
+Prepare();
 
-$inst_type=Prompt("Do you want a (U)ser or a (S)ystem installation ? [U/s] : ","US");
-
-$extdir = $inst_type eq 'U' ? "$home/.config/inkscape/extensions"
-                            : "$exedir/../share/inkscape/extensions";
-
-    $inst_type ne 'U'
-and $user='root';
-
-    -d  $extdir
-or  die "Something seems wrong : cannot find Inkscape extensions directory!. Aborting installation.)\n";
-
-    ($lang or $inst_type eq 'S')
-and $>
-and die "You need to run this script as root to make this installation. Aborting installation.\n";
-
-# Now we have everything set up to instal...
-
-# Install extension
-
-ExecCmd("sudo -u $user mkdir $extdir/Origami");
-ExecCmd("sudo -u $user cp $pwd/Origami/*.pm $extdir/Origami");
-ExecCmd("sudo -u $user cp $pwd/Origami/*.pl $extdir/Origami");
-ExecCmd("sudo -u $user cp $pwd/Origami/*.inx $extdir");
-
-    $lang
+    # Check if installed
+    -d "$extdir/Origami"
 and do {
-  ExecCmd("sudo -u $user mkdir $extdir/Origami/locale");
-  ExecCmd("sudo -u $user mkdir $extdir/Origami/locale/$lang");
-  ExecCmd("sudo -u $user mkdir $extdir/Origami/locale/$lang/LC_MESSAGES");
-  ExecCmd("sudo -u $user cp $pwd/Origami/locale/$lang/LC_MESSAGES/Origami.mo $extdir/Origami/locale/$lang/LC_MESSAGES/Origami.mo");
+  my($choice);
+
+  print "Origami-Ext already installed on this computer.\n";
+  $choice=Prompt("What do you want to do : (R)einstall, (S)uppress or (Q)uit ? [r/s/Q]:",'QRS');
+    $choice eq 'S'
+  and do {
+    # Confirm removal
+        Prompt("Are you sure you want to remove the Origami Extension ? [y/N]:", 'NY') eq 'N'
+    and die "Removal of Origami Extension aborted.\n";
+    Remove();
+    print("Origami-Ext has been successfully removed.\n");
+    exit(1);
+  };
+    $choice eq 'R'
+  and do {
+    Remove();
+    Install();
+    print("Origami-Ext has been successfully reinstalled.\n");
+    exit(1);
+  };
+  exit(1);
 };
 
-# Install Inkscape locale
+Install();
 
-print "\n";
+print "Origami-Ext successfully installed.\n";
 
-    $lang
-and do {
-      -e  "$localedir/inkscape-orig.mo"
-  and ExecCmd("cp $localedir/inkscape-orig.mo $localedir/inkscape.mo");
-
-  ExecCmd("cp $localedir/inkscape.mo $localedir/inkscape-orig.mo");
-  ExecCmd("msgunfmt -o $localedir/inkscape.po $localedir/inkscape.mo");
-  ExecCmd("msgcat --use-first -o $localedir/inkscape.po $localedir/inkscape.po $pwd/I18n/locale/$lang/Origami-Ext.po");
-  ExecCmd("msgfmt -o $localedir/inkscape.mo $localedir/inkscape.po");
-  ExecCmd("rm $localedir/inkscape.po");
-};
-
-print "Installation completed successfully.\n";
+exit(1);
