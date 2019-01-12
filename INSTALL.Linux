@@ -1,131 +1,106 @@
 
-
 Installation of the Origami-Ext extension on a Linux System
+-----------------------------------------------------------
+
+Your package manager is dpkg:
+
+The script install.linux will install or remove the Origami-Ext on any Linux
+system running dpkg as package manager, installing the perl modules on
+demand if they missing and all the available translations: just follwow the
+prompts.
 
 
+If you're unluky and your package manager is NOT dpkg, you will unfortunatly
+need to make a fully manual installation.
 
-1/Pre-requisite :
+Using your local package manager or using the ctan utility, install, if they
+are noti yet installed(*), the following Perl modules (preferably in this order) :
 
-- Perl (5.18 or newer)
+  - XML::NamespaceSupport
+  - XML::SAX::Base
+  - XML::SAX
+  - XML::LibXML
+  - Local::gettext
 
-- Perl Modules :
+and then make the installation as follow:
 
-  - XML-LibXML
-  - XML-NamespaceSupport
-  - XML-SAX-Base
-  - XML-SAX
+identify two paths:
 
-Linux package name :
-
-  libxml-libxml-perl
-
-- If you want I18n (internationalization support) :
-
-  - GNU gettext utilities
-
-  - Perl Module :
-
-    - Local::gettext
-
-  Linux package names are :
-
-  liblocale-gettext-perl
-  gettext
+  - rdir : the Inkscape install root directory where you will find locales and extensions
+  - sdir : the source path of the extension
 
 
-2/ Installation
+For that, open a terminal window, cd to the root of the Origami-Ext package and then issue the
+following bash commands (assuming Inkscape is installed on your system):
 
-  2.1 Basics
+  $ rdir=`which inkscape`
+  $ rdir=`dirname $rdir`
+  $ rdir="$rdir/../share"
+  $ sdir=`pwd`
 
-    2.1.1 User installation
+Now first part: instal the extension itself:
 
-    Been located into the Origami-Ext directory, do the following:
+  $ sudo cp -R  $sdir/Origami $rdir/inkscape/extensions/Origami
+  $ (cd $rdir/inkscape/extensions; sudo mv Origami/*.inx .)
 
-       - Locate your local Inkscape directory (assuming it is ~/<username>/.config/inkscape, but it may vary)
+and you're done.
 
-	- Issue the following bash commands :
+Second part, optional, install a language for the extention if it exists.
 
-          $ rdir=~/.config/inkscape/extensions
-          $ ldir=`pwd`
-          $ ln -s $ldir/Origami $rdir/Origami
-          $ (cd $rdir; ln -s ./Origami/*.inx .)
+Setup your language:
 
+  $ lang=<your_language>
 
-        - And your done.
+ie. if your language locale is 'fr':
 
-    2.1.2 System wide installation
+  $ lang=fr
 
-    It is just like for local user installation, except you'll need to sudo and use system wide inscape directory:
+Then check if a tranlation exists for your language:
 
-    Been located into the Origami-Ext directory, do the following:
+  $ ls $sdir/I18n/locale/$lang
 
-       - Locate your system wide Inkscape directory (assuming /usr/share/inkscape but it may vary)
+it should display two files:
 
-	- Issue the following bash commands :
+  - Origami.po
+  - Origami-Ext.po.
 
-          $ rdir=/usr/share/inkscape/extensions
-          $ ldir=`pwd`
-          $ sudo ln -s $ldir/Origami $rdir/Origami
-          $ (cd $rdir; sudo ln -s ./Origami/*.inx .)
+If it doesn,'t, that means that there is no (full) translation of Origami-Ext
+for your language. If you see those two files, you can process further and
+install the translation for your language.
 
-        - And your done, the extension is ready for use. You'll find the modules under the menu 'Extensions' in
-          a sub-section called 'Origami' (surprising, isn't it ?)
+First, install the Origami.po file containing translation for the extension
+messages:
 
+  $ sudo mkdir $rdir/inkscape/extensions/Origami/locale
+  $ sudo mkdir $rdir/inkscape/extensions/Origami/locale/$lang
+  $ sudo mkdir $rdir/inkscape/extensions/Origami/locale/$lang/LC_MESSAGES
+  $ sudo msgfmt -o $rdir/inkscape/extensions/Origami/locale/$lang/LC_MESSAGES/Origami.mo \
+                   $sdir/I18n/locale/$lang/Origami.po
 
+Next, install the Origami-Ext.po file containg translation the extension
+themselves, adding it to the original Inkscape translation itself:
 
+  $ sudo cp $rdir/locale/$lang/LC_MESSAGES/inkscape.mo $rdir/locale/$lang/LC_MESSAGES/inkscape-orig.mo
+  $ sudo msgunfmt -o $rdir/locale/$lang/LC_MESSAGES/inkscape.po $rdir/locale/$lang/LC_MESSAGES/inkscape.mo
+  $ sudo msgcat --use-first -o $rdir/locale/$lang/LC_MESSAGES/inkscape.po  \
+                               $rdir/locale/$lang/LC_MESSAGES/inkscape.po \
+                               $sdir/I18n/locale/$lang/Origami-Ext.po
+  $ sudo msgfmt -o $rdir/locale/$lang/LC_MESSAGES/inkscape.mo \
+                   $rdir/locale/$lang/LC_MESSAGES/inkscape.po
+  $ sudo rm $rdir/locale/$lang/LC_MESSAGES/inkscape.po
 
-  2.2 Internationalization
-
-
-  The first thing needed is that a translation exists for your given locale.
-  To check it, look into the I18n directory: if there exists a two letter subdirectory
-  corresponding to your locale, it means there should be a translation for it.
-
-  Then there are two distinct parts for it to work :
-
-     
-    a. The messages from the scripts themselves
-
-       This is the easy part : just make sure the needed Perl module Locale::gettext is
-       installed and it should work out-of-the-box. Nothing more to do.
-
-
-    b. The content of the Inkscape extention files
-
-       As this Inkscape extension is not an official, you will need to merge the translated
-       messages with the already existing Inkscape messages.
-
-       To do so, you will first need to have the GNU Gettext utilities installed, which is
-       fortunatly the case for most Linux distributions.
-
-	Then , in the I18n/<your_locale> directory, you should find a file called 
-        origami-ext.po : this is the file you will have to add to your inkscape.po file
-        but it can only be done system wide, so you will need to sudo somewhere and be
-        careful to backup the original file. This how to do :
-
-        - Locate the system locale directory, usually on most system,
-          /usr/share/locale/<your_locale>/LC_MESSAGES
-          and make a backup copy of the inkscape.mo message file :
-
-          $ localedir=/usr/share/locale/<your_locale>/LC_MESSAGES
-          $ (cd $localedir; sudo cp inkscape.mo inkscape-orig.mo)
-
-        - Then, as it is in compressed form, we will need to uncompress it using the
-          msgunfmt utility coming with the GNU gettext package :
-
-          $ (cd $localedir; sudo msgunfmt -o inkscape.po inkscape.mo)
-
-        - Then cd into the I18n/locale/<your_locale> directory and after making sure the Origami-Ext.po
-          is in there (double check !!), issue the following command :
-
-          $ origamiext=`pwd`/Origami-Ext.po
-          $ (cd $localedir; sudo msgcat --use-first -o inkscape.po inkscape.po $origamiext)
-
-        - The two files are now merged into the new inkscape.po and we just need to recompress it
-          for it to work by typing :
-
-          $ (cd $localedir; sudo msgfmt -o inkscape.mo inkscape.po; sudo rm inkscape.po)
-
-          and your done ! The extensions should be now fully translated in your locale.
-
+and you're done, the language is fully installed for the Origami-Ext extension.
  
+
+
+(*): to check if Perl module PERL::MODULE is available, just issue the following command:
+
+  $ perl -e 'require PERL::MODULE'
+
+If get no message, then the module is installed an ready to use. Otherwise, you will
+get an error message of the form:
+
+indicating the module is not installed, so you'll have to install it either by using your
+package manager or the ctan utility that comes usually bundled with Perl itself (it is in
+fact a perl script but it will require you have a full C development chain already
+installed on your system: gcc & ld, make, libraries, header files, etc.).
