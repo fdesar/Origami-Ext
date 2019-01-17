@@ -9,7 +9,7 @@ It has localization fully implemented and the French translation is already avai
 
 And more to come...
 
-Help needed for everything as translating, improving, debugging, correcting typos, installation on other OSes, doc writing... and more!
+Help needed for everything as translating, improving, debugging, correcting typos, doc writing... and more!
 
 Feed back welcome.
 
