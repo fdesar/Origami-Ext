@@ -56,7 +56,7 @@ $mess_root=$inkscape_root.'/../share/locale';
 sub Init {
   # First, verify we are located in the right place
       (-d "$cur_dir/../I18n" and -d "$cur_dir/../Origami")
-  or  die "This utility should be located in the Origami-Ext/I18n extension directory\n";
+  or  die "This utility should be executed from the Origami-Ext/I18n extension directory\n";
 
   # Copy inkscape.mo to inkscape-orig.mo for each supported locale
   for my $ling (@LINGUAE) {

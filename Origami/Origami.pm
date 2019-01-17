@@ -7,6 +7,7 @@ package Origami;
 use File::Basename;
 use Cwd 'abs_path';
 use lib dirname(abs_path(__FILE__));
+use lib dirname(abs_path(__FILE__)).'/perllib';
 
 
 use Getopt::Long qw/GetOptionsFromArray/;
@@ -17,6 +18,34 @@ use XML::LibXML::XPathContext;
 use bignum;
 
 use OriMath;
+
+#-------------------------------------------
+# Localization
+#-------------------------------------------
+# export gettext to be widely available
+use Exporter 'import';
+@EXPORT=qw(gettext);
+
+# Define gettext() sub
+    eval { # Try Locale::gettext
+      require Locale::gettext;
+      Locale::gettext::textdomain('Origami');
+      Locale::gettext::bindtextdomain('Origami', dirname(abs_path(__FILE__))."/locale");
+      eval 'sub gettext { return Locale::gettext::gettext(shift) }';
+      return 1;
+    }
+or  eval { # then try Locale::gettext_basic (pure Perl) module 
+      require Locale::gettext_basic;
+      Locale::gettext_basic::textdomain('Origami');
+      Locale::gettext_basic::bindtextdomain('Origami', dirname(abs_path(__FILE__))."/locale");
+      eval 'sub gettext { return Locale::gettext_basic::gettext(shift) }';
+      return 1;
+    }
+or  eval 'sub gettext { return shift }'; # then if no lib found, default to do nothing
+
+#-------------------------------------------
+
+# Private variables
 
 my %_NS=( 'svg'      => 'http://www.w3.org/2000/svg',
           'sodipodi' => 'http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd',
@@ -43,27 +72,6 @@ my($re_uinteger)='\d+';
 my($re_integer)="[+-]?$re_uinteger";
 my($re_num)="$re_integer(?:.$re_uinteger+)?(?:[Ee]$re_integer)?";
 
-
-use Exporter 'import';
-@EXPORT=qw(&gettext);
-
-#-------------------------------------------
-# Localization
-#-------------------------------------------
-# Define a default gettext function if Locale::gettext cannot be found 
-sub gettext {
-  my($msg) = shift;
-  return $msg;
-}
-# Try to load Locale::gettext. If it succeeds, it 
-# will override previous definition of gettext()
-eval {
-  require Locale::gettext;
-  Locale::gettext->import();
-  textdomain('Origami');
-  bindtextdomain('Origami', dirname(abs_path(__FILE__))."/locale");
-};
-#-------------------------------------------
 
 
 # Private methods : all prefixed by _
@@ -600,13 +608,11 @@ sub new {
  
           $node
       or  do {
-            if(@{$self->{select}{path}}) {
-              $node=$self->{select}{path}[-1]{layer}{node};
-              warn sprintf(gettext("Inkscape bug : current layer is not defined, forced to %s.")."\n",$self->{select}{path}[-1]{layer}{id});
-            }
-            else {
-              die gettext("Inkscape bug : current layer is not defined.")."\n";
-            }
+                @{$self->{select}{path}}
+            or  die gettext("Inkscape bug : current layer is not defined.")."\n";
+
+            $node=$self->{select}{path}[-1]{layer}{node};
+            warn sprintf(gettext("Inkscape bug : current layer is not defined, forced to %s.")."\n",$self->{select}{path}[-1]{layer}{id});
       };
 
       $current_layer->{node} = $node;
@@ -615,16 +621,10 @@ sub new {
       $current_layer->{transform}=$node->getAttribute('transform');
 
       
-      if(defined $current_layer->{transform}) {
-#xxx
-#              $current_layer->{transform} =~ /^translate\($re_num,($re_num)\)$/
-#          or  die "Invalid tranformation for layer '$self->{document}{current_layer}{id}' = '$current_layer->{transform}'.\n";
-#          $current_layer->{transform} = $1;
-         $current_layer->{transform} = $current_layer->{transform} =~ /^translate\($re_num,($re_num)\)$/ ? $1 : 0;
-      }
-      else {
-         $current_layer->{transform} = 0;
-      }
+      $current_layer->{transform} = 0;
+      
+          defined $current_layer->{transform}
+      and $current_layer->{transform} = $current_layer->{transform} =~ /^translate\($re_num,($re_num)\)$/ ? $1 : 0;
           
       return($current_layer);
     };

@@ -65,7 +65,6 @@ sub ExecCmd {
 }
 
 sub Prepare {
-  my($dpkg)=FindExecDir('dpkg');
   my($aptupdate)=0;
 
   my $InstModule = sub {
@@ -74,7 +73,7 @@ sub Prepare {
 
         eval "require $name"
     or  do {
-          $dpkg
+          FindExecDir('dpkg')
       or  die "Perl module $name not installed and your system doen't use dpkg : you'll have to install it yourself. Aborting Installation.\n"; 
 
           Prompt("Perl module $name not installed. Do you want me to install it ? [Y/n] : ","YN") eq 'Y'

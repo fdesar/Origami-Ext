@@ -1,0 +1,14 @@
+All the .dll and .exe in this directory are Copyright the
+Free Software Foundation, licensed under the terms GNU GPLv2
+or later at your convenience.
+
+The source and binaries with their md5sums are available at :
+
+http://gnuwin32.sourceforge.net/packages/gettext.htm
+
+They have been extracted from here and placed there for you to
+allow an easy installation of the Origami-Ext Inkscape extension
+on Windows systems.
+
+The perl script install-windows.pl is Copyright François
+Désarménien and is licenced under the terms of the GNU GPLv3.
