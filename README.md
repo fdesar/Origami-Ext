@@ -10,7 +10,7 @@ run virtually on any POSIX compliant system, on which Inkscape does, windows bee
 a lot of porting effort, as usual).
 
 On Windows, either Active Perl or Strawberry Perl must be installed prior to run the extension (see INSTALL.Windows).
-On all other systems, Perl is already installed by default.
+On all other systems, Perl is already installed by default (see INSTALL.Linux & INSTALL.macos).
 
 Localization is fully implemented and the French translation is already available.
 
