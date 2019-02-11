@@ -217,11 +217,7 @@ sub FromLine {
 
 sub FromSeg {
   my($self)=shift;
-  my(@seg)=@_;
-  my($a,$b);
-
-  $a=$seg[0];
-  $b=$seg[1];
+  my($a, $b) = @_==1 ? @{$_[0]} : @_;
 
   $self->[0]= $b->[0]-$a->[0];
   $self->[1]= $b->[1]-$a->[1];

@@ -1,7 +1,7 @@
 msgid "" 
 msgstr ""
-"POT-Creation-Date: 2019-01-04 09:46 UTC\n"
-"PO-Revision-Date: 2019-01-04 09:46 UTC\n"
+"POT-Creation-Date: 2019-02-11 14:57 UTC\n"
+"PO-Revision-Date: 2019-02-11 14:57 UTC\n"
 "Language-Team: <origami.ext@gmail>\n"
 "Project-Id-Version: initial\n"
 "Last-Translator: Francois Desarmenien\n"
@@ -11,199 +11,103 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Origami-Ext/GenPot\n"
 
-#: huzita4.inx:12
-msgid "\nHuzita-Hatori axiom 4 statement :\n\nGiven a point P1 and a line L1, there is a unique fold perpendicular to L1 that passes through point P1."
+#: huzita1.pl:33 huzita2.pl:35 huzita4.pl:33 huzita5.pl:41 huzita7.pl:28 nsection.pl:25 rabbitear.pl:37
+msgid "All points should be distinct."
 msgstr ""
 
-#: rabbitear.inx:18
-msgid "\nInput: One single segment made of 5 distinct points, first beeing the crossing point P, next three lying respectively on each of the three creases lines running from it and last one located anywhere in the quadrant in which you wish to get the fold.\n\nOutput: one guide showing the complementary angle.\n\nNote: if there is only one possible solution and it doesn't lie in the requested quadrant, a warning message will be issued and this sole solution will be shown."
+#: Origami.pm:631
+msgid "Inkscape bug : current layer is not defined, forced to %s."
 msgstr ""
 
-#: huzita2.inx:18
-msgid "\nInput : One single segment made of two distinct points, one for each point P1 and P2.\n\nOutput : One single guide showing the fold."
+#: Origami.pm:628
+msgid "Inkscape bug : current layer is not defined."
 msgstr ""
 
-#: rabbitear.inx:8
-msgid "Rabbit-Ear solver"
+#: huzita3.pl:150
+msgid "L1 and L2 cross each other: there are two possible folds."
 msgstr ""
 
-#: huzita5.inx:18 huzita6.inx:18 huzita7.inx:14
-msgid "Scale"
+#: huzita6.pl:49
+msgid "L1 should be made of distinct points."
 msgstr ""
 
-#: huzita3.inx:18
-msgid "\nInput: One single segment made of either:\n  - 3 distinct points, first to second, distinct, defining a segment of L1, second to third, distinct, defining a segment of L2.\n  - 4 points, first to second, distinct, defining a segment of L1, third and fourth, distinct, defining a segment of L2.\n\nOutput: One single guide showing the fold (see note).\n\n\nNote 1: if L1 and L2 intersect inside their defined segments then two folds are possible: a warning message will be issued and two guides will be drawn.\n\nNote 2: L1 and L2 can be either parallel or secant."
+#: huzita6.pl:53
+msgid "L2 should be made of distinct points."
 msgstr ""
 
-#: nsection.inx:9
-msgid "Sections"
+#: rabbitear.pl:75
+msgid "No solution for the requested quadrant : the unique solution will be drawn."
 msgstr ""
 
-#: huzita1.inx:17 huzita2.inx:17 huzita3.inx:17 huzita4.inx:17 huzita6.inx:40 huzita7.inx:36 nsection.inx:15 rabbitear.inx:17
-msgid "Use"
+#: huzita4.pl:43 huzita5.pl:69 huzita6.pl:85 huzita7.pl:58 huzita7.pl:67
+msgid "No solution."
 msgstr ""
 
-#: huzita1.inx:7 huzita2.inx:7 huzita3.inx:7 huzita4.inx:7 huzita6.inx:11 huzita7.inx:7 nsection.inx:7 rabbitear.inx:7
-msgid "Options"
+#: huzita7.pl:16 rabbitear.pl:32
+msgid "ONE segment made of FIVE points should be selected."
 msgstr ""
 
-#: huzita6.inx:41
-msgid "\nInput: One single segment made of six points, first beeing P1, second to third, distincts, delimiting a segment of L1, fourth beeing P2 and fifth to sixth, distinct, delimiting a segment of L2. Point P1 must not be on line L1, same for point P2 and line L2.\n\nOutput : None to three guides giving the possible folds, if one exists, and optionally, the projection segments of P1 onto L1 and P2 onto L2 and/or the parabolas P1->L1 and P2->L2 computed to get the solutions (it may be helpful to understand why there is no or more than one solution as they will always be drawn if requested).\n\n\nNote 1: only folds projecting both P1 and P2 onto their respective delimited segments of L1 and L2 will be drawn and if there is more than one possible fold, a warning message will be issued to remind you you'll need to remove or ignore the unwanted ones.\n\nNote 2: if you choose to draw the projections, you can choose both their color and stroke size."
+#: huzita5.pl:29
+msgid "ONE segment made of FOUR points should be selected."
 msgstr ""
 
-#: huzita1.inx:11 huzita2.inx:11 huzita3.inx:11 huzita4.inx:11 huzita5.inx:34 huzita6.inx:34 huzita7.inx:30 nsection.inx:11 rabbitear.inx:11
-msgid "Info"
+#: huzita6.pl:29
+msgid "ONE segment made of SIX points should be selected."
 msgstr ""
 
-#: huzita6.inx:12
-msgid "Huzita-Hatori Axiom 6 solver"
+#: huzita3.pl:18
+msgid "ONE segment made of THREE or FOUR points should be selected."
 msgstr ""
 
-#: huzita6.inx:3
-msgid "Huzita-6"
+#: huzita4.pl:30
+msgid "ONE segment made of THREE points should be selected."
 msgstr ""
 
-#: huzita6.inx:14 huzita7.inx:9
-msgid "Draw projections"
+#: nsection.pl:19
+msgid "ONE segment made of TWO or THREE points should be selected."
 msgstr ""
 
-#: huzita6.inx:13
-msgid "Suppress construction segments"
+#: huzita1.pl:28 huzita2.pl:30
+msgid "ONE segment made of TWO points should be selected."
 msgstr ""
 
-#: huzita1.inx:3
-msgid "Huzita-1"
+#: huzita6.pl:45
+msgid "P1 and P2 should be distinct."
 msgstr ""
 
-#: huzita5.inx:3
-msgid "Huzita-5"
+#: huzita6.pl:57
+msgid "Point P1 should not be on line L1."
 msgstr ""
 
-#: huzita3.inx:12
-msgid "\nHuzita-Hatori axiom 3 statement :\n\nGiven two lines L1 and L2, there is a unique fold that places L1 onto L2."
+#: huzita5.pl:46
+msgid "Point P2 should not be on line L."
 msgstr ""
 
-#: nsection.inx:3
-msgid "N-Section"
+#: huzita6.pl:61 huzita7.pl:33
+msgid "Point P2 should not be on line L2."
 msgstr ""
 
-#: huzita7.inx:37
-msgid "\nInput: One single segment made of 5 distinct points, first to second delimiting a segment of line L1, third beeing the point P, fourth to fith delimiting a segment of L2. Point P cannot be on line L2. \n\nOutput: None or one guide, giving the possible fold if it exists and optionally the projection segment of P onto L2 and/or the parabola P->L2 computed to get the solution (it may be helpful to understand why there is no solution as it will always be drawn if requested). \n\nNote 1: only folds projecting P onto the delimited segment of L2 and crossing L1 in its delemited segment will be draw.\n\nNote 2: if you choose to draw the projection, you can both choose its color and stroke size."
+#: Origami.pm:586
+msgid "Selected object is not a segment."
 msgstr ""
 
-#: huzita1.inx:8
-msgid "Huzita-Hatori Axiom 1 solver"
+#: Origami.pm:570
+msgid "Selected object is outside any layer (Inkscape bug!)."
 msgstr ""
 
-#: huzita1.inx:35 huzita2.inx:32 huzita3.inx:39 huzita4.inx:34 huzita5.inx:62 huzita6.inx:61 huzita7.inx:55 nsection.inx:27 rabbitear.inx:34
-msgid "Origami"
+#: Origami.pm:677
+msgid "Selected objects must be in the current layer."
 msgstr ""
 
-#: huzita7.inx:3
-msgid "Huzita-7"
+#: Origami.pm:602
+msgid "Selected objects must be in the same layer."
 msgstr ""
 
-#: huzita2.inx:12
-msgid "\nHuzita-Hatori axiom 2 statement :\n\nGiven two points P1 and P2, there is a unique fold that places P1 onto P2."
+#: huzita3.pl:34 huzita3.pl:36
+msgid "The two points of line L%s should be distinct."
 msgstr ""
 
-#: huzita4.inx:8
-msgid "Huzita4 solver"
-msgstr ""
-
-#: rabbitear.inx:3
-msgid "Rabbit-Ear"
-msgstr ""
-
-#: huzita5.inx:31 huzita6.inx:31 huzita7.inx:27
-msgid "Stroke color"
-msgstr ""
-
-#: huzita7.inx:31
-msgid "\nHuzita-Hatori-Justin axiom 7 statement :\n\nGiven one point P and two lines L1 and L2, there is a fold that places P onto L1 and is perpendicular to L2."
-msgstr ""
-
-#: huzita4.inx:3
-msgid "Huzita-4"
-msgstr ""
-
-#: huzita6.inx:35
-msgid "\nHuzita-Hatori axiom 6 statement :\n\nGiven two points P1 and P2 and two lines L1 and L2, there is a fold that places P1 onto L1 and P2 onto L2."
-msgstr ""
-
-#: huzita7.inx:8
-msgid "Huzita7 solver"
-msgstr ""
-
-#: huzita5.inx:35
-msgid "\nHuzita-Hatori axiom 5 statement :\n\nGiven two points P1 and P2 and a line L1, there is a fold\nthat places P1 onto L1 and passes through P2."
-msgstr ""
-
-#: huzita1.inx:12
-msgid "\nHuzita-Hatori axiom 1 statement :\n\nGiven two points P1 and P2, there is a unique fold that passes through both of them."
-msgstr ""
-
-#: huzita6.inx:20 huzita7.inx:16
-msgid "Projections"
-msgstr ""
-
-#: huzita5.inx:42
-msgid "\nInput: One single segment made of four distinct points, first and second beeing respectively P2 and P1, third to fourth defining a segment of L1.\n\nOutput : None to two guides giving the possible folds, if one exists, and optionally, the projection segments of P1 onto L1 and/or the parabola P1->L1 computed to get the solutions (it may be helpful to understand why there is no or more than one solution as it will always be drawn if requested).\n\n\nNote 1: only folds projecting P1 onto the defined segment of L1 will be draw and if there is more than one possible fold, a warning message will be issued to remind you you'll need to remove or ignore the unwanted one.\n\nNote 2: if you choose to draw the projections, you can both choose their color and stroke size."
-msgstr ""
-
-#: huzita2.inx:8
-msgid "Huzita-Hatori Axiom 2 solver"
-msgstr ""
-
-#: huzita6.inx:16 huzita7.inx:12
-msgid "Advanced"
-msgstr ""
-
-#: nsection.inx:8
-msgid "Angle N-Section"
-msgstr ""
-
-#: huzita5.inx:21 huzita6.inx:21 huzita7.inx:17
-msgid "Stroke width"
-msgstr ""
-
-#: nsection.inx:16
-msgid "\nInput: one single segment made of three distinct points, first to second to define L1 and second to third to define L2. \n\nOutput: one to N guides, one per section.\n\nNote: it applies only to the salient angle (0-180°) made by the two lines."
-msgstr ""
-
-#: rabbitear.inx:12
-msgid "\nGiven three crease lines L1, L2, L3 all crossing on point P not located on a raw edge, find the complementary crease line L4 crossing point P that allows the paper to lie flat while simultaneously folding all the creases.\n\nIf one of the angle L1-L2, L2-L3 or L3-L1 is greater than 180° then there is only one solution, located in the quadrant between the two crease lines that make this angle. Othewise, there are 3 solutions, one between each consecutive crease lines."
-msgstr ""
-
-#: huzita1.inx:18
-msgid "\nInput : One single segment made of two distinct points, one for each point P1 and P2.\n\nOutput : One single guide showing the fold.\n\n\nNote: As the solution is the input segment itself, this extension is merely a joke written only to complete the full set of Hatori-Huzita axioms."
-msgstr ""
-
-#: huzita2.inx:3
-msgid "Huzita-2"
-msgstr ""
-
-#: huzita5.inx:17 huzita6.inx:17 huzita7.inx:13
-msgid "Draw construction"
-msgstr ""
-
-#: huzita4.inx:18
-msgid "\nInput: One single segment made of three points, first beeing P1, second to third defining a segment of L1.\n\nOutput: None or one guide showing the fold, if it exists.\n\nNote: if the fold runs outside the defined segment of L1, there will be no solution."
-msgstr ""
-
-#: nsection.inx:12
-msgid "\nGiven two lines L1 and L2 crossing point P, divide the salient angle (0-180°) between L1 and L2 in N equal angles."
-msgstr ""
-
-#: huzita3.inx:8
-msgid "HuzitaHatori Axiom 3 solver"
-msgstr ""
-
-#: huzita3.inx:3
-msgid "Huzita-3"
-msgstr ""
-
-#: huzita1.inx:9 huzita2.inx:9 huzita3.inx:9 huzita4.inx:9 huzita7.inx:10 rabbitear.inx:9
-msgid "Suppress construction segment"
+#: huzita5.pl:73 huzita6.pl:88
+msgid "Warning : %d folds are possible!"
 msgstr ""
 
