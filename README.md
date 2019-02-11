@@ -9,6 +9,9 @@ Available with fully automated install scripts for Linux, Windows and MacOS  (wr
 run virtually on any POSIX compliant system, on which Inkscape does, windows beeing an exception and needed
 a lot of porting effort, as usual).
 
+On Windows, either Active Perl or Strawberry Perl must be installed prior to run the extension (see INSTALL.Windows).
+On all other systems, Perl is already installed by default.
+
 Localization is fully implemented and the French translation is already available.
 
 Help very welcome for everything as translating, improving, debugging, correcting typos, doc writing... and more!
