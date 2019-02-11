@@ -53,26 +53,8 @@ $inkscape_root="/usr/local/bin";
 $mess_root=$inkscape_root.'/../share/locale';
 
 
-sub Init {
-  # First, verify we are located in the right place
-      (-d "$cur_dir/../I18n" and -d "$cur_dir/../Origami")
-  or  die "This utility should be executed from the Origami-Ext/I18n extension directory\n";
-
-  # Copy inkscape.mo to inkscape-orig.mo for each supported locale
-  for my $ling (@LINGUAE) {
-    my($mo) = "$mess_root/$ling/LC_MESSAGES/inkscape.mo";
-        -e $mo
-    or warn "$mo file not found: unable to copy inkscape.mo for locale '$ling'.\n";
-
-      -d $ling
-    or mkdir($ling, 0755);
-
-    system("cp $mo $ling/inscape-orig.mo")
-  }
-}
-
-sub GenInxPot {
-  my($potfile)="$cur_dir/Origami-Ext.pot";
+sub GenInkPot {
+  my($potfile)="$cur_dir/Origami-Ink.pot";
   my(@inx)=<../Origami/*.inx>;
   my(%msg);
   my($dom);
@@ -129,8 +111,8 @@ sub GenInxPot {
   &$WritePot();
 }
 
-sub GenScriptPot {
-  my($potfile)="$cur_dir/Origami.pot";
+sub GenExtPot {
+  my($potfile)="$cur_dir/Origami-Ext.pot";
   my(@inx)=(<../Origami/*.pl>, <../Origami/*.pm>);
   my(%msg);
 
@@ -184,7 +166,9 @@ sub GenScriptPot {
   &$WritePot();
 }
 
-Init();
-# Generate Origami.pot file to Pot dir
-GenInxPot();
-GenScriptPot();
+    (-d "$cur_dir/../I18n" and -d "$cur_dir/../Origami")
+or  die "This utility should be executed from the Origami-Ext/I18n extension directory\n";
+
+# Generate Origami*.pot files
+GenInkPot();
+GenExtPot();

@@ -1,0 +1,25 @@
+
+Installation of the Origami-Ext extension on a MacOS system
+-----------------------------------------------------------
+
+This extension only works with Inkscape installed from MacPorts or HomeBrew.
+It WON'T install on system where inkscape has been installed as a Mac OS Application.
+
+On both MacPorts and HomeBrew, the needed library to build the required Perl modules
+should already hav been installed by installing Inkscape.
+
+You should then use the cpan command line tool to install the two required Perl Modules:
+
+  - XML::LibXML
+  - Locale::Gettext
+
+by issuing the commands:
+
+  $ sudo cpan install XML::LibXML
+  $ sudo cpan install Locale::Gettext
+
+then you can run the install-macos.pl script to install the Origami-Ext Inkscape extension.
+
+Beware that your milage may vary...
+
+If you run into troubles, contact the author at <origami.ext@gmail.com>.

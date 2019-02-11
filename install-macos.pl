@@ -8,7 +8,7 @@ use Cwd qw/abs_path/;
 use Config;
 
 
-    $Config{osname} ne 'linux'
+    $Config{osname} ne 'darwin'
 and die "Sorry, you're not on a Linux system. Aborting installation.\n";
 
     $>

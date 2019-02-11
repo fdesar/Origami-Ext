@@ -22,26 +22,42 @@ use OriMath;
 #-------------------------------------------
 # Localization
 #-------------------------------------------
-# export gettext to be widely available
-use Exporter 'import';
-@EXPORT=qw(gettext);
+BEGIN{
+    # export gettext to be widely available
+  use Exporter 'import';
+  @EXPORT=qw(gettext);
 
-# Define gettext() sub
-    eval { # Try Locale::gettext
-      require Locale::gettext;
-      Locale::gettext::textdomain('Origami');
-      Locale::gettext::bindtextdomain('Origami', dirname(abs_path(__FILE__))."/locale");
-      eval 'sub gettext { return Locale::gettext::gettext(shift) }';
-      return 1;
-    }
-or  eval { # then try Locale::gettext_basic (pure Perl) module 
-      require Locale::gettext_basic;
-      Locale::gettext_basic::textdomain('Origami');
-      Locale::gettext_basic::bindtextdomain('Origami', dirname(abs_path(__FILE__))."/locale");
-      eval 'sub gettext { return Locale::gettext_basic::gettext(shift) }';
-      return 1;
-    }
-or  eval 'sub gettext { return shift }'; # then if no lib found, default to do nothing
+  my($localedir);
+  my($domain)='Origami-Ext';
+
+  # Locate the locale directory
+  $localedir=abs_path(__FILE__);
+      $localedir =~ /^(.+\/share)\/inkscape/i
+  or  $localedir =~ /^(.+[\/|\\]inkscape[\/|\\]share)/i # for Win32
+  or  warn("Locale directory not found.\n");
+  $localedir = defined($1) ?  "$1/locale" : undef;
+
+
+  # Define gettext() sub
+      defined($localedir)
+  and (
+          eval { # Try Locale::gettext
+            require Locale::gettext;
+            Locale::gettext::textdomain($domain);
+            Locale::gettext::bindtextdomain($domain, $localedir);
+            eval 'sub gettext { return Locale::gettext::gettext(shift) }';
+            return 1;
+          }
+      or  eval { # then try Locale::gettext_basic (pure Perl) module 
+            require Locale::gettext_basic;
+            Locale::gettext_basic::textdomain($domain);
+            Locale::gettext_basic::bindtextdomain($domain, $localedir);
+            eval 'sub gettext { return Locale::gettext_basic::gettext(shift) }';
+            return 1;
+          }
+      )
+  or  eval 'sub gettext { return shift }'; # then if no lib found, default to do nothing
+}
 
 #-------------------------------------------
 

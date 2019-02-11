@@ -1,0 +1,18 @@
+The gettext utilities and DLLs packaged here for your convenience
+have been dowloaded from GNUWin32 project from their main site:
+
+http://gnuwin32.sourceforge.net
+
+at the URL: 
+
+http://gnuwin32.sourceforge.net/packages/gettext.htm
+
+They have been unpacked from the
+
+"Complete package, except sources", "Setup" autoinstaller.
+
+If you're paranoid or simply suspect something could go wrong,
+you can download them from the zip package and compare their MD5
+or SHA-1 signatures...
+
+Enjoy. 

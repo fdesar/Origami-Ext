@@ -9,98 +9,12 @@ system running dpkg as package manager, installing the perl modules on
 demand if they missing and all the available translations: just follwow the
 prompts.
 
+If you're unlucky and your package manager is NOT dpkg, you will unfortunatly
+need to install manually the packages containing therequired Perl modules:
 
-If you're unluky and your package manager is NOT dpkg, you will unfortunatly
-need to make a fully manual installation.
-
-Using your local package manager or using the ctan utility, install, if they
-are noti yet installed(*), the following Perl modules (preferably in this order) :
-
-  - XML::NamespaceSupport
-  - XML::SAX::Base
-  - XML::SAX
   - XML::LibXML
   - Local::gettext
 
-and then make the installation as follow:
+and then run the install script.
 
-identify two paths:
-
-  - rdir : the Inkscape install root directory where you will find locales and extensions
-  - sdir : the source path of the extension
-
-
-For that, open a terminal window, cd to the root of the Origami-Ext package and then issue the
-following bash commands (assuming Inkscape is installed on your system):
-
-  $ rdir=`which inkscape`
-  $ rdir=`dirname $rdir`
-  $ rdir="$rdir/../share"
-  $ sdir=`pwd`
-
-Now first part: instal the extension itself:
-
-  $ sudo cp -R  $sdir/Origami $rdir/inkscape/extensions/Origami
-  $ (cd $rdir/inkscape/extensions; sudo mv Origami/*.inx .)
-
-and you're done.
-
-Second part, optional, install a language for the extention if it exists.
-
-Setup your language:
-
-  $ lang=<your_language>
-
-ie. if your language locale is 'fr':
-
-  $ lang=fr
-
-Then check if a tranlation exists for your language:
-
-  $ ls $sdir/I18n/locale/$lang
-
-it should display two files:
-
-  - Origami.po
-  - Origami-Ext.po.
-
-If it doesn,'t, that means that there is no (full) translation of Origami-Ext
-for your language. If you see those two files, you can process further and
-install the translation for your language.
-
-First, install the Origami.po file containing translation for the extension
-messages:
-
-  $ sudo mkdir $rdir/inkscape/extensions/Origami/locale
-  $ sudo mkdir $rdir/inkscape/extensions/Origami/locale/$lang
-  $ sudo mkdir $rdir/inkscape/extensions/Origami/locale/$lang/LC_MESSAGES
-  $ sudo msgfmt -o $rdir/inkscape/extensions/Origami/locale/$lang/LC_MESSAGES/Origami.mo \
-                   $sdir/I18n/locale/$lang/Origami.po
-
-Next, install the Origami-Ext.po file containg translation the extension
-themselves, adding it to the original Inkscape translation itself:
-
-  $ sudo cp $rdir/locale/$lang/LC_MESSAGES/inkscape.mo $rdir/locale/$lang/LC_MESSAGES/inkscape-orig.mo
-  $ sudo msgunfmt -o $rdir/locale/$lang/LC_MESSAGES/inkscape.po $rdir/locale/$lang/LC_MESSAGES/inkscape.mo
-  $ sudo msgcat --use-first -o $rdir/locale/$lang/LC_MESSAGES/inkscape.po  \
-                               $rdir/locale/$lang/LC_MESSAGES/inkscape.po \
-                               $sdir/I18n/locale/$lang/Origami-Ext.po
-  $ sudo msgfmt -o $rdir/locale/$lang/LC_MESSAGES/inkscape.mo \
-                   $rdir/locale/$lang/LC_MESSAGES/inkscape.po
-  $ sudo rm $rdir/locale/$lang/LC_MESSAGES/inkscape.po
-
-and you're done, the language is fully installed for the Origami-Ext extension.
- 
-
-
-(*): to check if Perl module PERL::MODULE is available, just issue the following command:
-
-  $ perl -e 'require PERL::MODULE'
-
-If get no message, then the module is installed an ready to use. Otherwise, you will
-get an error message of the form:
-
-indicating the module is not installed, so you'll have to install it either by using your
-package manager or the ctan utility that comes usually bundled with Perl itself (it is in
-fact a perl script but it will require you have a full C development chain already
-installed on your system: gcc & ld, make, libraries, header files, etc.).
+If you run into troubles, contact the author at <origami.ext@gmail.com>.
