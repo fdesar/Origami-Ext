@@ -293,10 +293,12 @@ sub _ParseSVGPath {
   return(@points);
 }
 
-# End of private methods
+sub _ShowGuides {
+  my($self)=shift;
 
-
-# Public Methods
+    $self->{document}{showguides} ne 'true'
+  and $self->{document}{namedview}->setAttribute("showguides", 'true');
+}
 
 sub _AddElement {
   my($self)=shift;
@@ -451,7 +453,12 @@ sub _NewGuide {
   return $node;
 }
 
+# End of private methods
+
 #----------------
+
+# Public Methods
+
 
 sub Segments {
   my($self)=shift;
@@ -482,6 +489,7 @@ sub AddQBPath {
 sub AddGuide {
   my($self)=shift;
   $self->_AddElement($self->{document}{namedview}, $self->_NewGuide(@_));
+  $self->_ShowGuides();
 }
 
 # Get variable given by Inkscape
@@ -664,6 +672,7 @@ sub new {
     $self->{document}{namedview} = $node;
 
     $self->{document}{lockguides} = $node->getAttribute('inkscape:lockguides');
+    $self->{document}{showguides} = $node->getAttribute('showguides');
     $self->{document}{units} = $node->getAttribute('units');
 
     # Get selection
