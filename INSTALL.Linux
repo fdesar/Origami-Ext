@@ -4,13 +4,13 @@ Installation of the Origami-Ext extension on a Linux System
 
 Your package manager is dpkg:
 
-The script install.linux will install or remove the Origami-Ext on any Linux
-system running dpkg as package manager, installing the perl modules on
-demand if they missing and all the available translations: just follwow the
+The install.linux script will install or remove the Origami-Ext on any Linux
+system running dpkg as package manager, installing the perl modules on the
+fly if they are missing and all the available translations: just follow the
 prompts.
 
 If you're unlucky and your package manager is NOT dpkg, you will unfortunatly
-need to install manually the packages containing therequired Perl modules:
+need to install manually the packages containing the required Perl modules(*):
 
   - XML::LibXML
   - Local::gettext
@@ -18,3 +18,6 @@ need to install manually the packages containing therequired Perl modules:
 and then run the install script.
 
 If you run into troubles, contact the author at <origami.ext@gmail.com>.
+
+(*) The RPM packages are usually called respectively 'perl-XML-LibXML' and
+'perl-Locale-gettext'.
