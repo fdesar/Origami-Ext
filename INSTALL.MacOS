@@ -2,7 +2,7 @@
 Installation of the Origami-Ext extension on a MacOS system
 -----------------------------------------------------------
 
-This extension only works with Inkscape installed from MacPorts or HomeBrew.
+This extension will only works with Inkscape installed from MacPorts or HomeBrew.
 It WON'T install on system where inkscape has been installed as a Mac OS Application.
 
 On both MacPorts and HomeBrew, the needed library to build the required Perl modules

@@ -2,8 +2,9 @@
 Intallation on Windows
 ----------------------
 
-Tested on Windows 10 Family in a VirtualBox but will probably
-install on earlier versions of Windows (7-10).
+Tested on Windows 10 Family in a 64bit VirtualBox but will
+probably install on earlier versions of Windows (7-10) and
+probably run on 32bit systems too.
 
 
 Prerequisite:
@@ -19,24 +20,27 @@ Prerequisite:
 Installation :
 --------------
 
-From the File Finder, go to the Origami-Ext directory and
-right click on the install-windows.bat file and choose to
-execute it as Admin then follow the prompts.
+Download the Origami-Ext.zip file and extract it. From the
+File Finder, go to the Origami-Ext directory created, right
+click on the install-windows.bat filei, choose to execute
+it as Admin and then follow the prompts.
 
 It will install:
 
-- if needed, the required Perl Module(s) (Active Perl *ONLY*.
-  The modules are already installed in Strawberry Perl)
+- if needed, the required Perl Module(s) (for Active Perl
+  *ONLY* as the modules are already installed in Strawberry
+  Perl)
 - the extension itself
-- the translations for the available languages 
+- the translations for all the available languages 
 
-IF no problem occured and the box telling you the installation
-succeeded, the Inkscape Origami Extension is ready to use.
+If no problem occured, a message box telling you the installation
+was successful will pop up and the Inkscape Origami Extension is
+ready to use.
 
-If you encounter any problem, verify Inkscape and Active Perl
+If you encounter any problem, first verify Inkscape and Perl
 are correctly installed and running and if they are and you're
-still stuck,  note the error message and please contact the
-author at:
+still stuck, note the error message(s) and please contact the
+author with as much informations as possible on the problem at:
 
  <origami.ext.gmail.com>.
 
@@ -51,16 +55,18 @@ Notes:
 
     https://inkscape.org/fr/release/0.92.3/windows/64-bit/
 
-(2) You can download Active Perl (choose V 5.26) at:
+(2) You can download Active Perl (choose V 5.26 or later) at:
 
     https://www.activestate.com/products/activeperl/downloads/
 
-(3) You can downloas Strawberry Perl (choose V 5.28) at:
+(3) You can download Strawberry Perl (choose V 5.28 or later) at:
 
     http://strawberryperl.com
 
-    Note: you must install the MSI edition in ant place of your choice
-          but NOT the Portable Edition! Or it won't work!
+    Note: you must install the MSI edition in any place of your
+          choice (but the path must NOT contain any white spaces
+          or  you'll get into troubles !).
+          Do NOT install the "Portable Edition": it won't work!
 
 (4) You can download the latest version of Origami-Ext at:
 
