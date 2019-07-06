@@ -644,8 +644,11 @@ sub new {
       $current_layer->{id}=$node->getAttribute('id');
       $current_layer->{transform}=$node->getAttribute('transform');
 
-          defined $current_layer->{transform}
-      and $current_layer->{transform} = $current_layer->{transform} =~ /^translate\($re_num,($re_num)\)$/ ? $1 : 0;
+      if(defined $current_layer->{transform}) {
+        $current_layer->{transform} = $current_layer->{transform} =~ /^translate\($re_num,($re_num)\)$/ ? $1 : 0;
+      } else {
+        $current_layer->{transform}=0;
+      }
           
       return($current_layer);
     };
