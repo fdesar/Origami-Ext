@@ -249,6 +249,8 @@ sub _ParseSVGPath {
 
   my $Close = sub {
     my($cmd,@args)=@_;
+    # Segment is closed so duplicate first point as last point
+    push(@points, [ $points[0][0], $points[0][1] ]);
   };
 
 
