@@ -1,5 +1,8 @@
 *** NEW *** This realease now includes a full embeded User Manuel!
 
+You can get a preview at : https://github.com/fdesar/Origami-Ext/blob/master/Origami/Manual/en/HandBook.pdf
+
+
 Origami-Ext
 
 Inkscape Extension for Origami diagramming, written by an origamist for origamists and origami diagrammers using Inkscape
