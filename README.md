@@ -1,3 +1,5 @@
+*** NEW *** This realease now includes a full embeded User Manuel!
+
 Origami-Ext
 
 Inkscape Extension for Origami diagramming, written by an origamist for origamists and origami diagrammers using Inkscape
