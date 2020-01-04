@@ -1,7 +1,7 @@
 msgid "" 
 msgstr ""
-"POT-Creation-Date: 2019-02-11 14:57 UTC\n"
-"PO-Revision-Date: 2019-02-11 14:57 UTC\n"
+"POT-Creation-Date: 2020-01-04 13:53 UTC\n"
+"PO-Revision-Date: 2020-01-04 13:53 UTC\n"
 "Language-Team: <origami.ext@gmail>\n"
 "Project-Id-Version: initial\n"
 "Last-Translator: Francois Desarmenien\n"
@@ -15,11 +15,11 @@ msgstr ""
 msgid "All points should be distinct."
 msgstr ""
 
-#: Origami.pm:631
+#: Origami.pm:641
 msgid "Inkscape bug : current layer is not defined, forced to %s."
 msgstr ""
 
-#: Origami.pm:628
+#: Origami.pm:638
 msgid "Inkscape bug : current layer is not defined."
 msgstr ""
 
@@ -71,6 +71,10 @@ msgstr ""
 msgid "ONE segment made of TWO points should be selected."
 msgstr ""
 
+#: manual.pl:53
+msgid "Origami-Ext HanBook not found!"
+msgstr ""
+
 #: huzita6.pl:45
 msgid "P1 and P2 should be distinct."
 msgstr ""
@@ -87,19 +91,19 @@ msgstr ""
 msgid "Point P2 should not be on line L2."
 msgstr ""
 
-#: Origami.pm:586
+#: Origami.pm:596
 msgid "Selected object is not a segment."
 msgstr ""
 
-#: Origami.pm:570
+#: Origami.pm:580
 msgid "Selected object is outside any layer (Inkscape bug!)."
 msgstr ""
 
-#: Origami.pm:677
+#: Origami.pm:688
 msgid "Selected objects must be in the current layer."
 msgstr ""
 
-#: Origami.pm:602
+#: Origami.pm:612
 msgid "Selected objects must be in the same layer."
 msgstr ""
 

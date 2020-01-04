@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: initial\n"
-"POT-Creation-Date: 2019-02-11 14:57 UTC\n"
-"PO-Revision-Date: 2019-02-11 16:08+0100\n"
+"POT-Creation-Date: 2019-12-27 16:03 UTC\n"
+"PO-Revision-Date: 2019-12-27 17:09+0100\n"
 "Last-Translator: \n"
 "Language-Team: <origami.ext@gmail>\n"
 "Language: fr\n"
@@ -12,193 +12,62 @@ msgstr ""
 "X-Generator: Poedit 2.2\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: rabbitear.inx:8
-msgid "Rabbit-Ear solver"
-msgstr "Résolution de l’oreille de lapin"
-
 #: huzita1.inx:11 huzita2.inx:11 huzita3.inx:11 huzita4.inx:11 huzita5.inx:34
 #: huzita6.inx:34 huzita7.inx:30 nsection.inx:12 rabbitear.inx:11
 msgid "Info"
 msgstr "Info"
 
-#: huzita6.inx:20 huzita7.inx:16
-msgid "Projections"
-msgstr "Projections"
-
-#: huzita3.inx:3
-msgid "Huzita-3"
-msgstr "Huzita-3"
-
-#: huzita4.inx:18
-msgid ""
-"\n"
-"Input: One single segment made of three points, first beeing P1, second to "
-"third defining a segment of L1.\n"
-"\n"
-"Output: None or one guide showing the fold, if it exists.\n"
-"\n"
-"Note: if the fold runs outside the defined segment of L1, there will be no "
-"solution."
-msgstr ""
-"\n"
-"Entrée : un unique segment composé de trois points, le premier étant P1 et "
-"les deux suivant définissant un segment de D1.\n"
-"\n"
-"Sortie : zéro ou un guide indiquant le pli, s’il existe.\n"
-"\n"
-"Note : si le pli ne passe pas par le segment défini de D1, il n’y aura pas "
-"de solution."
-
 #: huzita5.inx:3
 msgid "Huzita-5"
 msgstr "Huzita-5"
-
-#: nsection.inx:20
-msgid ""
-"\n"
-"Input: one single segment made of either two distinct points defining "
-"segment S or three distinct points, first to second to define L1 and second "
-"to third to define L2.\n"
-"\n"
-"Output: one to N guides, one per section.\n"
-"\n"
-"Note: for angle N-Section, only applies to the salient side (0-180°) made by "
-"the two lines."
-msgstr ""
-"\n"
-"Entrée : un unique segment constitué soit de deux points distincts "
-"définissant le segment S ou de trois points distincts, le premier au second "
-"définissant un segment de la droite D1, le second au troisième  un segment "
-"de la droite D2.\n"
-"\n"
-"Sortie : un à N guides, un pour chaque division.\n"
-"\n"
-"Note : pour les angles, ceci ne s’applique qu’au côté saillant (0-180°) "
-"formé par les deux droites."
-
-#: huzita6.inx:14 huzita7.inx:9
-msgid "Draw projections"
-msgstr "Dessiner la projection"
-
-#: huzita5.inx:35
-msgid ""
-"\n"
-"Huzita-Hatori axiom 5 statement :\n"
-"\n"
-"Given two points P1 and P2 and a line L1, there is a fold\n"
-"that places P1 onto L1 and passes through P2."
-msgstr ""
-"\n"
-"Énoncé de l’axiome 5 de Huzita-Hatori :\n"
-"\n"
-"Étant donnés deux points P1 et P2 et une droite D, il existe un pli plaçant "
-"P1 sur D passant par P2."
-
-#: huzita4.inx:3
-msgid "Huzita-4"
-msgstr "Huzita-4"
-
-#: rabbitear.inx:3
-msgid "Rabbit-Ear"
-msgstr "Oreille de lapin"
-
-#: nsection.inx:13
-msgid ""
-"\n"
-"- Given a segment S divide it in N equal parts\n"
-"or\n"
-"- Given two lines L1 and L2 crossing point P, divide the salient angle "
-"(0-180°) between L1 and L2 in N equal angles."
-msgstr ""
-"\n"
-"- Étant donné un segment S, le diviser en N parties égales\n"
-"ou\n"
-"- Étant données deux droites D1 et D2 sécantes en P, diviser l’angle "
-"saillant (0-180°) entre D1 et D2 en N angles égaux."
-
-#: huzita5.inx:31 huzita6.inx:31 huzita7.inx:27
-msgid "Stroke color"
-msgstr "Couleur du contour"
-
-#: huzita2.inx:8
-msgid "Huzita-Hatori Axiom 2 solver"
-msgstr "Résolution de l’axiome 2 de Huzita-Hatori"
-
-#: nsection.inx:3
-msgid "N-Section"
-msgstr "N-Section"
-
-#: huzita1.inx:9 huzita2.inx:9 huzita3.inx:9 huzita4.inx:9 huzita7.inx:10
-#: nsection.inx:10 rabbitear.inx:9
-msgid "Suppress construction segment"
-msgstr "Supprimer le segment de construction"
-
-#: huzita6.inx:3
-msgid "Huzita-6"
-msgstr "Huzita-6"
-
-#: huzita6.inx:13
-msgid "Suppress construction segments"
-msgstr "Supprimer le segment de construction"
-
-#: nsection.inx:8
-msgid "Angle/Segment N-Section"
-msgstr "Division d’un angle ou d’un segment en N-parties égales"
-
-#: huzita5.inx:17 huzita6.inx:17 huzita7.inx:13
-msgid "Draw construction"
-msgstr "Dessiner la construction"
-
-#: huzita5.inx:42
-msgid ""
-"\n"
-"Input: One single segment made of four distinct points, first and second "
-"beeing respectively P2 and P1, third to fourth defining a segment of L1.\n"
-"\n"
-"Output : None to two guides giving the possible folds, if one exists, and "
-"optionally, the projection segments of P1 onto L1 and/or the parabola P1->L1 "
-"computed to get the solutions (it may be helpful to understand why there is "
-"no or more than one solution as it will always be drawn if requested).\n"
-"\n"
-"\n"
-"Note 1: only folds projecting P1 onto the defined segment of L1 will be draw "
-"and if there is more than one possible fold, a warning message will be "
-"issued to remind you you'll need to remove or ignore the unwanted one.\n"
-"\n"
-"Note 2: if you choose to draw the projections, you can both choose their "
-"color and stroke size."
-msgstr ""
-"\n"
-"Entrée : un unique segment sélectionné constitué de quatre points distincts "
-"les deux premier représentant respectivement P2 et P1, le troisième et le "
-"quatrième délimitant un segment de D1.\n"
-"\n"
-"Sortie : de zéro à deux guides indiquant les plis possibles, s’ils existent, "
-"et, optionnellement le ou les segments projetés de P1 sur D1 et/ou la "
-"parabole P1->D1 calculée permettant de trouver les solutions (ce qui peut-"
-"être utile pour comprendre pourquoi aucune ou plus d’une solution sont "
-"possible, celle-ci étant toujours dessinée lorsqu’elle est demandée).\n"
-"\n"
-"Note 1 : seuls les plis plaçants P1 sur le segment défini de D1 seront "
-"dessinés et s’il existe plus d’un plis possible, un message d’avertissement "
-"est issu pour rappeler qu’il faudra supprimer ou ignorer le pli indésirable "
-"et sa projection.\n"
-"\n"
-"Note 2 : si vous choisissez de dessiner les projections, vous pouvez choisir "
-"la couleur et la taille de leurs traits."
-
-#: huzita1.inx:17 huzita2.inx:17 huzita3.inx:17 huzita4.inx:17 huzita6.inx:40
-#: huzita7.inx:36 nsection.inx:19 rabbitear.inx:17
-msgid "Use"
-msgstr "Utiliser"
 
 #: huzita1.inx:3
 msgid "Huzita-1"
 msgstr "Huzita-1"
 
+#: nsection.inx:3
+msgid "N-Section"
+msgstr "N-Section"
+
+#: manual.inx:3
+msgid "** User's Guide **"
+msgstr "** Manuel Utilisateur **"
+
+#: huzita6.inx:12
+msgid "Huzita-Hatori Axiom 6 solver"
+msgstr ""
+"Résolution de l’axiome 6\n"
+" de Huzita-Hatori"
+
+#: huzita5.inx:17 huzita6.inx:17 huzita7.inx:13
+msgid "Draw construction"
+msgstr "Dessiner la construction"
+
+#: huzita7.inx:8
+msgid "Huzita7 solver"
+msgstr ""
+"Résolution de l’axiome 7\n"
+" de Huzita-Hatori"
+
+#: huzita6.inx:3
+msgid "Huzita-6"
+msgstr "Huzita-6"
+
+#: nsection.inx:8
+msgid "Angle/Segment N-Section"
+msgstr "Division d’un angle ou d’un segment en N-parties égales"
+
+#: huzita6.inx:16 huzita7.inx:12
+msgid "Advanced"
+msgstr "Avancé"
+
 #: huzita7.inx:3
 msgid "Huzita-7"
 msgstr "Huzita-7"
+
+#: huzita1.inx:8
+msgid "Huzita-Hatori Axiom 1 solver"
+msgstr "Résolution de l’axiome 1 de Huzita-Hatori"
 
 #: huzita1.inx:18
 msgid ""
@@ -221,211 +90,33 @@ msgstr ""
 "Note : la pli étant le segment lui-même, cette extension est essentiellement "
 "une plaisanterie destinée à compléter l’ensemble des axiomes d’Huzita-Hatori."
 
-#: huzita3.inx:18
-msgid ""
-"\n"
-"Input: One single segment made of either:\n"
-"  - 3 distinct points, first to second, distinct, defining a segment of L1, "
-"second to third, distinct, defining a segment of L2.\n"
-"  - 4 points, first to second, distinct, defining a segment of L1, third and "
-"fourth, distinct, defining a segment of L2.\n"
-"\n"
-"Output: One single guide showing the fold (see note).\n"
-"\n"
-"\n"
-"Note 1: if L1 and L2 intersect inside their defined segments then two folds "
-"are possible: a warning message will be issued and two guides will be "
-"drawn.\n"
-"\n"
-"Note 2: L1 and L2 can be either parallel or secant."
-msgstr ""
-"\n"
-"Entrée : un unique segment sélectionné composé indifféremment de :\n"
-"  - 3 points distincts, le premier au second délimitant un segment de D1, le "
-"second au troisième un segment de D2.\n"
-"  - 4 points, le premier au second, distincts, délimitant un segment de D1, "
-"le troisième au quatrième, distincts, délimitant un segment de D2.\n"
-"\n"
-"Sortie : un guide indiquant le pli (voir notes).\n"
-"\n"
-"Note 1 : si D1 et D2 se coupent entre les segment définis, il existe alors "
-"deux possibilité : un message d’avertissement sera issu et deux guide seront "
-"destinés.\n"
-"\n"
-"Note 2 : les droite D1 et D2 peuvent aussi bien être parallèles que sécantes."
-
-#: huzita1.inx:7 huzita2.inx:7 huzita3.inx:7 huzita4.inx:7 huzita6.inx:11
-#: huzita7.inx:7 nsection.inx:7 rabbitear.inx:7
-msgid "Options"
-msgstr "Options"
-
-#: huzita1.inx:12
-msgid ""
-"\n"
-"Huzita-Hatori axiom 1 statement :\n"
-"\n"
-"Given two points P1 and P2, there is a unique fold that passes through both "
-"of them."
-msgstr ""
-"\n"
-"Énoncé de l’axiome 1 de Huzita-Hatori :\n"
-"\n"
-"Étant donnés deux points P1 et P2, il existe un pli unique passant par ces "
-"deux points."
-
-#: huzita2.inx:18
-msgid ""
-"\n"
-"Input : One single segment made of two distinct points, one for each point "
-"P1 and P2.\n"
-"\n"
-"Output : One single guide showing the fold."
-msgstr ""
-"\n"
-"Entrée : un unique segment composé de deux points distincts, un pour chaque "
-"point PA et P2.\n"
-"\n"
-"Sortie : un guide indiquant le pli"
-
-#: huzita1.inx:8
-msgid "Huzita-Hatori Axiom 1 solver"
-msgstr "Résolution de l’axiome 1 de Huzita-Hatori"
-
-#: huzita5.inx:21 huzita6.inx:21 huzita7.inx:17
-msgid "Stroke width"
-msgstr "Épaisseur du contour"
-
-#: rabbitear.inx:18
-msgid ""
-"\n"
-"Input: One single segment made of 5 distinct points, first beeing the "
-"crossing point P, next three lying respectively on each of the three creases "
-"lines running from it and last one located anywhere in the quadrant in which "
-"you wish to get the fold.\n"
-"\n"
-"Output: one guide showing the complementary angle.\n"
-"\n"
-"Note: if there is only one possible solution and it doesn't lie in the "
-"requested quadrant, a warning message will be issued and this sole solution "
-"will be shown."
-msgstr ""
-"\n"
-"Entrée : un unique segment sélectionné constitué de cinq points, le premier "
-"représentant le point d’intersection P, les trois suivant étant placés sur "
-"chacune des droites D1, D2, D3 qui en partent et le dernier placé n’importe "
-"où dans le quadrant ou vous souhaitez obtenir le pli.\n"
-"\n"
-"Sortie : un unique guide représentant l’angle complémentaire L4\n"
-"\n"
-"Note : si une seule solution existe et qu’elle ne se trouve pas dans le "
-"quadrant choisi, un message d’avertissement est issu et l’unique solution "
-"sera dessinée."
-
-#: nsection.inx:9
-msgid "Sections"
-msgstr "Divisions"
-
 #: huzita4.inx:8
 msgid "Huzita4 solver"
 msgstr "Résolution de l’axiome 4 de Huzita-Hatori"
 
-#: huzita7.inx:31
-msgid ""
-"\n"
-"Huzita-Hatori-Justin axiom 7 statement :\n"
-"\n"
-"Given one point P and two lines L1 and L2, there is a fold that places P "
-"onto L1 and is perpendicular to L2."
-msgstr ""
-"\n"
-"Énoncé de l’axiome 7 de Huzita-Hatori-Justin :\n"
-"\n"
-"Étant donnés un points P et deux droites D1 et D2, il existe un pli plaçant "
-"P sur D1 perpendiculaire à D2."
-
-#: huzita3.inx:8
-msgid "HuzitaHatori Axiom 3 solver"
-msgstr "Résolution de l’axiome 3 de Huzita-Hatori"
-
-#: huzita7.inx:37
-msgid ""
-"\n"
-"Input: One single segment made of 5 distinct points, first to second "
-"delimiting a segment of line L1, third beeing the point P, fourth to fith "
-"delimiting a segment of L2. Point P cannot be on line L2. \n"
-"\n"
-"Output: None or one guide, giving the possible fold if it exists and "
-"optionally the projection segment of P onto L2 and/or the parabola P->L2 "
-"computed to get the solution (it may be helpful to understand why there is "
-"no solution as it will always be drawn if requested). \n"
-"\n"
-"Note 1: only folds projecting P onto the delimited segment of L2 and "
-"crossing L1 in its delemited segment will be draw.\n"
-"\n"
-"Note 2: if you choose to draw the projection, you can both choose its color "
-"and stroke size."
-msgstr ""
-"\n"
-"Entrée : un unique segment constitué de cinq points distincts, le premier au "
-"second délimitant un segment de D1, le troisième étant le point P, le "
-"quatrième et le cinquième éliminant un segment de D2\n"
-"\n"
-"Sortie : zéro ou un guide indiquant le pli possible, s’il existe, et "
-"optionnellement le segment projeté de P sur D2 et/ou la parabole P->D2 "
-"calculée permettant de trouver les solutions (ce qui peut-être utile pour "
-"comprendre pourquoi aucune solution n’est possible, celle-ci étant toujours "
-"dessinée lorsqu’elle est demandée).\n"
-"\n"
-"Note 1 : seuls le pli plaçant P sur le segment défini de D2 et passant par "
-"le segment défini de D1 sera dessiné.\n"
-"\n"
-"Note 2 : si vous choisissez de dessiner les projections, vous pouvez choisir "
-"la couleur et la taille de leurs traits."
-
-#: rabbitear.inx:12
-msgid ""
-"\n"
-"Given three crease lines L1, L2, L3 all crossing on point P not located on a "
-"raw edge, find the complementary crease line L4 crossing point P that allows "
-"the paper to lie flat while simultaneously folding all the creases.\n"
-"\n"
-"If one of the angle L1-L2, L2-L3 or L3-L1 is greater than 180° then there is "
-"only one solution, located in the quadrant between the two crease lines that "
-"make this angle. Othewise, there are 3 solutions, one between each "
-"consecutive crease lines."
-msgstr ""
-"\n"
-"Étant données trois ligne de pli L1, L2 et L3 se croisant toutes en un point "
-"P n’étant pas situé sur un bord, trouver la ligne de pli complémentaire L4 "
-"permettant de plier à plat simultanément les quatre plis.\n"
-"\n"
-"Si un des angles L1-L2, L2-L3 ou L3-L1 est supérieur à 180°, il n’existe "
-"alors qu’une seule solution, situé dans le quadrant situé entre les deux "
-"ligne faisant cet angle. Sinon, trois solutions sont possibles, une pour "
-"chaque intervalle entre deux lignes consécutives."
-
-#: huzita6.inx:16 huzita7.inx:12
-msgid "Advanced"
-msgstr "Avancé"
-
-#: huzita5.inx:18 huzita6.inx:18 huzita7.inx:14
-msgid "Scale"
-msgstr "Échelle"
-
-#: huzita2.inx:3
-msgid "Huzita-2"
-msgstr "Huzita-2"
-
-#: huzita7.inx:8
-msgid "Huzita7 solver"
-msgstr ""
-"Résolution de l’axiome 7\n"
-" de Huzita-Hatori"
-
 #: huzita1.inx:35 huzita2.inx:32 huzita3.inx:39 huzita4.inx:34 huzita5.inx:62
-#: huzita6.inx:61 huzita7.inx:55 nsection.inx:31 rabbitear.inx:34
+#: huzita6.inx:61 huzita7.inx:55 manual.inx:9 nsection.inx:31 rabbitear.inx:34
 msgid "Origami"
 msgstr "Origami"
+
+#: huzita1.inx:17 huzita2.inx:17 huzita3.inx:17 huzita4.inx:17 huzita6.inx:40
+#: huzita7.inx:36 nsection.inx:19 rabbitear.inx:17
+msgid "Use"
+msgstr "Utiliser"
+
+#: huzita5.inx:35
+msgid ""
+"\n"
+"Huzita-Hatori axiom 5 statement :\n"
+"\n"
+"Given two points P1 and P2 and a line L1, there is a fold\n"
+"that places P1 onto L1 and passes through P2."
+msgstr ""
+"\n"
+"Énoncé de l’axiome 5 de Huzita-Hatori :\n"
+"\n"
+"Étant donnés deux points P1 et P2 et une droite D, il existe un pli plaçant "
+"P1 sur D passant par P2."
 
 #: huzita3.inx:12
 msgid ""
@@ -439,31 +130,10 @@ msgstr ""
 "\n"
 "Étant donnés deux droite L1 et L2, il existe un pli unique plaçant L1 sur L2."
 
-#: huzita6.inx:35
-msgid ""
-"\n"
-"Huzita-Hatori axiom 6 statement :\n"
-"\n"
-"Given two points P1 and P2 and two lines L1 and L2, there is a fold that "
-"places P1 onto L1 and P2 onto L2."
-msgstr ""
-"\n"
-"Énoncé de l’axiome 6 de Huzita-Hatori :\n"
-"\n"
-"Étant donnés deux points P1 et P2 et deux droites D1 et D2, il existe un pli "
-"plaçant P1 sur D1 et P2 sur D2."
-
-#: huzita2.inx:12
-msgid ""
-"\n"
-"Huzita-Hatori axiom 2 statement :\n"
-"\n"
-"Given two points P1 and P2, there is a unique fold that places P1 onto P2."
-msgstr ""
-"\n"
-"Énoncé de l’axiome 2 de Huzita-Hatori :\n"
-"\n"
-"Étant donnés deux points P1 et P2, il existe un pli unique plaçant P1 sur P2."
+#: huzita1.inx:7 huzita2.inx:7 huzita3.inx:7 huzita4.inx:7 huzita6.inx:11
+#: huzita7.inx:7 nsection.inx:7 rabbitear.inx:7
+msgid "Options"
+msgstr "Options"
 
 #: huzita6.inx:41
 msgid ""
@@ -508,6 +178,314 @@ msgstr ""
 "Note 2 : si vous choisissez de dessiner les projections, vous pouvez choisir "
 "la couleur et la taille de leurs traits."
 
+#: huzita6.inx:35
+msgid ""
+"\n"
+"Huzita-Hatori axiom 6 statement :\n"
+"\n"
+"Given two points P1 and P2 and two lines L1 and L2, there is a fold that "
+"places P1 onto L1 and P2 onto L2."
+msgstr ""
+"\n"
+"Énoncé de l’axiome 6 de Huzita-Hatori :\n"
+"\n"
+"Étant donnés deux points P1 et P2 et deux droites D1 et D2, il existe un pli "
+"plaçant P1 sur D1 et P2 sur D2."
+
+#: huzita3.inx:18
+msgid ""
+"\n"
+"Input: One single segment made of either:\n"
+"  - 3 distinct points, first to second, distinct, defining a segment of L1, "
+"second to third, distinct, defining a segment of L2.\n"
+"  - 4 points, first to second, distinct, defining a segment of L1, third and "
+"fourth, distinct, defining a segment of L2.\n"
+"\n"
+"Output: One single guide showing the fold (see note).\n"
+"\n"
+"\n"
+"Note 1: if L1 and L2 intersect inside their defined segments then two folds "
+"are possible: a warning message will be issued and two guides will be "
+"drawn.\n"
+"\n"
+"Note 2: L1 and L2 can be either parallel or secant."
+msgstr ""
+"\n"
+"Entrée : un unique segment sélectionné composé indifféremment de :\n"
+"  - 3 points distincts, le premier au second délimitant un segment de D1, le "
+"second au troisième un segment de D2.\n"
+"  - 4 points, le premier au second, distincts, délimitant un segment de D1, "
+"le troisième au quatrième, distincts, délimitant un segment de D2.\n"
+"\n"
+"Sortie : un guide indiquant le pli (voir notes).\n"
+"\n"
+"Note 1 : si D1 et D2 se coupent entre les segment définis, il existe alors "
+"deux possibilité : un message d’avertissement sera issu et deux guide seront "
+"destinés.\n"
+"\n"
+"Note 2 : les droite D1 et D2 peuvent aussi bien être parallèles que sécantes."
+
+#: huzita4.inx:3
+msgid "Huzita-4"
+msgstr "Huzita-4"
+
+#: rabbitear.inx:12
+msgid ""
+"\n"
+"Given three crease lines L1, L2, L3 all crossing on point P not located on a "
+"raw edge, find the complementary crease line L4 crossing point P that allows "
+"the paper to lie flat while simultaneously folding all the creases.\n"
+"\n"
+"If one of the angle L1-L2, L2-L3 or L3-L1 is greater than 180° then there is "
+"only one solution, located in the quadrant between the two crease lines that "
+"make this angle. Othewise, there are 3 solutions, one between each "
+"consecutive crease lines."
+msgstr ""
+"\n"
+"Étant données trois ligne de pli L1, L2 et L3 se croisant toutes en un point "
+"P n’étant pas situé sur un bord, trouver la ligne de pli complémentaire L4 "
+"permettant de plier à plat simultanément les quatre plis.\n"
+"\n"
+"Si un des angles L1-L2, L2-L3 ou L3-L1 est supérieur à 180°, il n’existe "
+"alors qu’une seule solution, situé dans le quadrant situé entre les deux "
+"ligne faisant cet angle. Sinon, trois solutions sont possibles, une pour "
+"chaque intervalle entre deux lignes consécutives."
+
+#: huzita3.inx:3
+msgid "Huzita-3"
+msgstr "Huzita-3"
+
+#: huzita2.inx:12
+msgid ""
+"\n"
+"Huzita-Hatori axiom 2 statement :\n"
+"\n"
+"Given two points P1 and P2, there is a unique fold that places P1 onto P2."
+msgstr ""
+"\n"
+"Énoncé de l’axiome 2 de Huzita-Hatori :\n"
+"\n"
+"Étant donnés deux points P1 et P2, il existe un pli unique plaçant P1 sur P2."
+
+#: huzita4.inx:18
+msgid ""
+"\n"
+"Input: One single segment made of three points, first beeing P1, second to "
+"third defining a segment of L1.\n"
+"\n"
+"Output: None or one guide showing the fold, if it exists.\n"
+"\n"
+"Note: if the fold runs outside the defined segment of L1, there will be no "
+"solution."
+msgstr ""
+"\n"
+"Entrée : un unique segment composé de trois points, le premier étant P1 et "
+"les deux suivant définissant un segment de D1.\n"
+"\n"
+"Sortie : zéro ou un guide indiquant le pli, s’il existe.\n"
+"\n"
+"Note : si le pli ne passe pas par le segment défini de D1, il n’y aura pas "
+"de solution."
+
+#: huzita5.inx:42
+msgid ""
+"\n"
+"Input: One single segment made of four distinct points, first and second "
+"beeing respectively P2 and P1, third to fourth defining a segment of L1.\n"
+"\n"
+"Output : None to two guides giving the possible folds, if one exists, and "
+"optionally, the projection segments of P1 onto L1 and/or the parabola P1->L1 "
+"computed to get the solutions (it may be helpful to understand why there is "
+"no or more than one solution as it will always be drawn if requested).\n"
+"\n"
+"\n"
+"Note 1: only folds projecting P1 onto the defined segment of L1 will be draw "
+"and if there is more than one possible fold, a warning message will be "
+"issued to remind you you'll need to remove or ignore the unwanted one.\n"
+"\n"
+"Note 2: if you choose to draw the projections, you can both choose their "
+"color and stroke size."
+msgstr ""
+"\n"
+"Entrée : un unique segment sélectionné constitué de quatre points distincts "
+"les deux premier représentant respectivement P2 et P1, le troisième et le "
+"quatrième délimitant un segment de D1.\n"
+"\n"
+"Sortie : de zéro à deux guides indiquant les plis possibles, s’ils existent, "
+"et, optionnellement le ou les segments projetés de P1 sur D1 et/ou la "
+"parabole P1->D1 calculée permettant de trouver les solutions (ce qui peut-"
+"être utile pour comprendre pourquoi aucune ou plus d’une solution sont "
+"possible, celle-ci étant toujours dessinée lorsqu’elle est demandée).\n"
+"\n"
+"Note 1 : seuls les plis plaçants P1 sur le segment défini de D1 seront "
+"dessinés et s’il existe plus d’un plis possible, un message d’avertissement "
+"est issu pour rappeler qu’il faudra supprimer ou ignorer le pli indésirable "
+"et sa projection.\n"
+"\n"
+"Note 2 : si vous choisissez de dessiner les projections, vous pouvez choisir "
+"la couleur et la taille de leurs traits."
+
+#: huzita2.inx:8
+msgid "Huzita-Hatori Axiom 2 solver"
+msgstr "Résolution de l’axiome 2 de Huzita-Hatori"
+
+#: huzita3.inx:8
+msgid "HuzitaHatori Axiom 3 solver"
+msgstr "Résolution de l’axiome 3 de Huzita-Hatori"
+
+#: huzita2.inx:3
+msgid "Huzita-2"
+msgstr "Huzita-2"
+
+#: huzita5.inx:18 huzita6.inx:18 huzita7.inx:14
+msgid "Scale"
+msgstr "Échelle"
+
+#: rabbitear.inx:18
+msgid ""
+"\n"
+"Input: One single segment made of 5 distinct points, first beeing the "
+"crossing point P, next three lying respectively on each of the three creases "
+"lines running from it and last one located anywhere in the quadrant in which "
+"you wish to get the fold.\n"
+"\n"
+"Output: one guide showing the complementary angle.\n"
+"\n"
+"Note: if there is only one possible solution and it doesn't lie in the "
+"requested quadrant, a warning message will be issued and this sole solution "
+"will be shown."
+msgstr ""
+"\n"
+"Entrée : un unique segment sélectionné constitué de cinq points, le premier "
+"représentant le point d’intersection P, les trois suivant étant placés sur "
+"chacune des droites D1, D2, D3 qui en partent et le dernier placé n’importe "
+"où dans le quadrant ou vous souhaitez obtenir le pli.\n"
+"\n"
+"Sortie : un unique guide représentant l’angle complémentaire L4\n"
+"\n"
+"Note : si une seule solution existe et qu’elle ne se trouve pas dans le "
+"quadrant choisi, un message d’avertissement est issu et l’unique solution "
+"sera dessinée."
+
+#: huzita7.inx:37
+msgid ""
+"\n"
+"Input: One single segment made of 5 distinct points, first to second "
+"delimiting a segment of line L1, third beeing the point P, fourth to fith "
+"delimiting a segment of L2. Point P cannot be on line L2. \n"
+"\n"
+"Output: None or one guide, giving the possible fold if it exists and "
+"optionally the projection segment of P onto L2 and/or the parabola P->L2 "
+"computed to get the solution (it may be helpful to understand why there is "
+"no solution as it will always be drawn if requested). \n"
+"\n"
+"Note 1: only folds projecting P onto the delimited segment of L2 and "
+"crossing L1 in its delemited segment will be draw.\n"
+"\n"
+"Note 2: if you choose to draw the projection, you can both choose its color "
+"and stroke size."
+msgstr ""
+"\n"
+"Entrée : un unique segment constitué de cinq points distincts, le premier au "
+"second délimitant un segment de D1, le troisième étant le point P, le "
+"quatrième et le cinquième éliminant un segment de D2\n"
+"\n"
+"Sortie : zéro ou un guide indiquant le pli possible, s’il existe, et "
+"optionnellement le segment projeté de P sur D2 et/ou la parabole P->D2 "
+"calculée permettant de trouver les solutions (ce qui peut-être utile pour "
+"comprendre pourquoi aucune solution n’est possible, celle-ci étant toujours "
+"dessinée lorsqu’elle est demandée).\n"
+"\n"
+"Note 1 : seuls le pli plaçant P sur le segment défini de D2 et passant par "
+"le segment défini de D1 sera dessiné.\n"
+"\n"
+"Note 2 : si vous choisissez de dessiner les projections, vous pouvez choisir "
+"la couleur et la taille de leurs traits."
+
+#: nsection.inx:20
+msgid ""
+"\n"
+"Input: one single segment made of either two distinct points defining "
+"segment S or three distinct points, first to second to define L1 and second "
+"to third to define L2.\n"
+"\n"
+"Output: one to N guides, one per section.\n"
+"\n"
+"Note: for angle N-Section, only applies to the salient side (0-180°) made by "
+"the two lines."
+msgstr ""
+"\n"
+"Entrée : un unique segment constitué soit de deux points distincts "
+"définissant le segment S ou de trois points distincts, le premier au second "
+"définissant un segment de la droite D1, le second au troisième  un segment "
+"de la droite D2.\n"
+"\n"
+"Sortie : un à N guides, un pour chaque division.\n"
+"\n"
+"Note : pour les angles, ceci ne s’applique qu’au côté saillant (0-180°) "
+"formé par les deux droites."
+
+#: huzita6.inx:20 huzita7.inx:16
+msgid "Projections"
+msgstr "Projections"
+
+#: nsection.inx:9
+msgid "Sections"
+msgstr "Divisions"
+
+#: huzita1.inx:9 huzita2.inx:9 huzita3.inx:9 huzita4.inx:9 huzita7.inx:10
+#: nsection.inx:10 rabbitear.inx:9
+msgid "Suppress construction segment"
+msgstr "Supprimer le segment de construction"
+
+#: huzita2.inx:18
+msgid ""
+"\n"
+"Input : One single segment made of two distinct points, one for each point "
+"P1 and P2.\n"
+"\n"
+"Output : One single guide showing the fold."
+msgstr ""
+"\n"
+"Entrée : un unique segment composé de deux points distincts, un pour chaque "
+"point PA et P2.\n"
+"\n"
+"Sortie : un guide indiquant le pli."
+
+#: huzita5.inx:13 huzita6.inx:14 huzita7.inx:9
+msgid "Draw projections"
+msgstr "Dessiner la projection"
+
+#: huzita5.inx:21 huzita6.inx:21 huzita7.inx:17
+msgid "Stroke width"
+msgstr "Épaisseur du contour"
+
+#: huzita5.inx:31 huzita6.inx:31 huzita7.inx:27
+msgid "Stroke color"
+msgstr "Couleur du contour"
+
+#: huzita7.inx:31
+msgid ""
+"\n"
+"Huzita-Hatori-Justin axiom 7 statement :\n"
+"\n"
+"Given one point P and two lines L1 and L2, there is a fold that places P "
+"onto L1 and is perpendicular to L2."
+msgstr ""
+"\n"
+"Énoncé de l’axiome 7 de Huzita-Hatori-Justin :\n"
+"\n"
+"Étant donnés un points P et deux droites D1 et D2, il existe un pli plaçant "
+"P sur D1 perpendiculaire à D2."
+
+#: rabbitear.inx:8
+msgid "Rabbit-Ear solver"
+msgstr "Résolution de l’oreille de lapin"
+
+#: huzita5.inx:14 huzita6.inx:13
+msgid "Suppress construction segments"
+msgstr "Supprimer le segment de construction"
+
 #: huzita4.inx:12
 msgid ""
 "\n"
@@ -522,11 +500,37 @@ msgstr ""
 "Étant donnés un point P et une droite D, il existe un pli unique "
 "perpendiculaire à D passant par P."
 
-#: huzita6.inx:12
-msgid "Huzita-Hatori Axiom 6 solver"
+#: huzita1.inx:12
+msgid ""
+"\n"
+"Huzita-Hatori axiom 1 statement :\n"
+"\n"
+"Given two points P1 and P2, there is a unique fold that passes through both "
+"of them."
 msgstr ""
-"Résolution de l’axiome 6\n"
-" de Huzita-Hatori"
+"\n"
+"Énoncé de l’axiome 1 de Huzita-Hatori :\n"
+"\n"
+"Étant donnés deux points P1 et P2, il existe un pli unique passant par ces "
+"deux points."
+
+#: nsection.inx:13
+msgid ""
+"\n"
+"- Given a segment S divide it in N equal parts\n"
+"or\n"
+"- Given two lines L1 and L2 crossing point P, divide the salient angle "
+"(0-180°) between L1 and L2 in N equal angles."
+msgstr ""
+"\n"
+"- Étant donné un segment S, le diviser en N parties égales\n"
+"ou\n"
+"- Étant données deux droites D1 et D2 sécantes en P, diviser l’angle "
+"saillant (0-180°) entre D1 et D2 en N angles égaux."
+
+#: rabbitear.inx:3
+msgid "Rabbit-Ear"
+msgstr "Oreille de lapin"
 
 #~ msgid "Division"
 #~ msgstr "Division"
