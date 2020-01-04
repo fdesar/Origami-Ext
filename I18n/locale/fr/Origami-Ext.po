@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: initial\n"
-"POT-Creation-Date: 2019-02-11 14:57 UTC\n"
-"PO-Revision-Date: 2019-02-11 15:58+0100\n"
+"POT-Creation-Date: 2020-01-04 13:53 UTC\n"
+"PO-Revision-Date: 2020-01-04 14:55+0100\n"
 "Last-Translator: \n"
 "Language-Team: <origami.ext@gmail>\n"
 "Language: fr\n"
@@ -17,11 +17,11 @@ msgstr ""
 msgid "All points should be distinct."
 msgstr "Tout les points doivent être distincts."
 
-#: Origami.pm:631
+#: Origami.pm:641
 msgid "Inkscape bug : current layer is not defined, forced to %s."
 msgstr "Bug d’Inkscape : le calque courant n’est pas défini, forcé à %s."
 
-#: Origami.pm:628
+#: Origami.pm:638
 msgid "Inkscape bug : current layer is not defined."
 msgstr "Bug d’Inkscape : le calque courant n’est pas défini."
 
@@ -77,6 +77,10 @@ msgstr "UN segment constitué de DEUX ou TROIS points doit être sélectionné."
 msgid "ONE segment made of TWO points should be selected."
 msgstr "UN segment constitué de DEUX points doit être sélectionné."
 
+#: manual.pl:53
+msgid "Origami-Ext HanBook not found!"
+msgstr "Manuel d’Origami-Ext introuvable !"
+
 #: huzita6.pl:45
 msgid "P1 and P2 should be distinct."
 msgstr "P1 et P2 doivent être distincts."
@@ -93,19 +97,19 @@ msgstr "Le point P2 ne doit pas être sur la droite D."
 msgid "Point P2 should not be on line L2."
 msgstr "Le point P2 ne doit pas être sur la droite D2."
 
-#: Origami.pm:586
+#: Origami.pm:596
 msgid "Selected object is not a segment."
 msgstr "L’object sélectionné n’est pas un segment."
 
-#: Origami.pm:570
+#: Origami.pm:580
 msgid "Selected object is outside any layer (Inkscape bug!)."
 msgstr "L’object sélectionné est en dehors de tout calque (bug d’Inkscape)."
 
-#: Origami.pm:677
+#: Origami.pm:688
 msgid "Selected objects must be in the current layer."
 msgstr "Les objets sélectionnés doivent se trouver dans le calque courant."
 
-#: Origami.pm:602
+#: Origami.pm:612
 msgid "Selected objects must be in the same layer."
 msgstr "Les objets sélectionnés doivent se trouver dans le même calque."
 

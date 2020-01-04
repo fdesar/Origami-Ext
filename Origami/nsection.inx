@@ -6,7 +6,7 @@
 <param name="name" type="notebook">
     <page name="page_1" _gui-text="Options">
       <_param name="descrition" type="description" appearance="header">Angle/Segment N-Section</_param>
-      <param name="nsec" type="int" min="2" max="20" _gui-text="Sections">1</param>
+      <param name="nsec" type="int" min="2" max="64" _gui-text="Sections">1</param>
       <param name="clean" type="boolean" _gui-text="Suppress construction segment">false</param>
     </page>
     <page name="page_2" _gui-text="Info">
