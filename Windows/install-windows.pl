@@ -14,54 +14,109 @@ my($inkExtDir, $srcExtDir, $srcLocale, $dstLocale);
 my($srcPerllibDir, $dstPerllibDir);
 my($ori_ext)='Origami-Ext';
 my($ori_ink)='Origami-Ink';
+my($action);
+my($perlpath)='';
 
 
 $SIG{__DIE__} = sub { $^S and return; Win32::MsgBox(shift, MB_ICONEXCLAMATION, 'Origami-Ext Installation') };
 
-sub ExecCmd {
-	my($prg)=shift;
-	my($cmd)=$prg;
-	my(@args)=@_;
-	my($log);
+sub SetPerlPath {
 
-	for (@args) {
-				$_ =~ /\ /
-		and $_="'$_'";
-	}
+        eval { require Win32::Env };
+    not $@
+    and do {
+        my($addpath) = shift;
+        my($path);
+        my($regexp);
 
-	$cmd=$prg.' '.join(' ',@args);
-	$log=`$cmd 2>&1`;
-			$?
-	and die "Error executing: >$prg<:\n$log\n";
+        $path = Win32::Env::GetEnv(0, 'PATH'); 
+        $addpath=~s/\\perl(?:.exe)?$//;
+
+        $regexp = $addpath;
+        $regexp =~ s/\\/\\\\/g;
+
+            $path !~ /$regexp/
+        and do {
+            $path =~ s/\s*;$//;
+            $path .= ";$addpath;";
+            Win32::Env::SetEnv(0, 'PATH', $path);
+            Win32::Env::BroadcastEnv();
+        };
+    };
 }
 
+sub ExecCmd {
+    my($prg);
+    my($cmd);
+    my(@args)=@_;
+    my($log);
+
+    for (@args) {
+        $_ =~ s/\//\\/g;
+        $_ =~ /\ / and $_="\"$_\"";
+    }
+
+    $cmd=join(' ',@args);
+
+    $log=`$cmd 2>&1`;
+			$?
+    and die sprintf("Error executing: >%s<:\n%s", $args[0], $log);
+
+}
 
 sub Init {
 
-			Win32::IsAdminUser()
-	or  die "Must be run as Admin.\n";
+    my $CheckModule = sub {
+      my($module)=shift;
 
-  $homeDir=dirname(abs_path(__FILE__));
-  $homeDir=~s|[/\/][^/\/]+$||;
+      # Check if $module is installed
+      # if not, Active Perl is probably used : try to install it with ppm
+      eval "require $module";
+      $@ ne '' and do {
+	 my($log);
+	 print("Adding Perl module $module (this may take a while)...");
+	 $log=`ppm install $module 2>&1`;
+	      $?
+	  and die "Installation of $module module failed:\n\n$log\n";
+          print "done.\n";
+          eval "require $module";
+             $@ eq ''
+          or die "Module $module still not available : you're probably not using Active Perl !\n";
+      };
+    };
 
-			-f $homeDir.'/Windows/'.basename(__FILE__)
-	or	die "Invalid installation directory:\n\n$ARGV[0]\n";
+#    &$CheckModule("Win32::Env");
+    &$CheckModule("XML::LibXML");
+    
+        (defined($ARGV[0]) and $ARGV[0] =~ /^(UN)?INSTALL$/)
+    or  die("This Perl script must not be run directly : \nRun the script install-windows.cmd instead\n");
 
-	# Search Inkscape directory
-	for my $path ('C:/Program Files', 'C:/Program Files (x86)') {
-				-d $path.'/Inkscape'
-		and	do {
-			$inkDir=$path.'/Inkscape';
-			last;
-		}
-	}
-			$inkDir
-	or	die "Inkscape directory not found.\n(Is Inkscape installed?)\n";
+    $action=$ARGV[0];
 
-	$wperlExe=dirname(qq/$^X/).'/wperl.exe';
+    defined($ARGV[1]) and $perlpath=$ARGV[1];
 
-			-f $wperlExe
-	or  die "wperl.exe not found.\n\n(Which version of Perl did you install?)\n";
+
+    $homeDir=dirname(abs_path(__FILE__));
+    $homeDir=~s|[/\/][^/\/]+$||;
+
+        -f $homeDir.'/Windows/'.basename(__FILE__)
+    or	die "Invalid installation directory:\n\n$ARGV[0]\n";
+
+    # Search Inkscape directory
+    for my $path ('C:/Program Files', 'C:/Program Files (x86)') {
+            -d $path.'/Inkscape'
+        and	do {
+            $inkDir=$path.'/Inkscape';
+            last;
+        }
+    }
+        -d $inkDir
+    or	die "Inkscape directory not found.\n(Is Inkscape installed?)\n";
+
+    $wperlExe=dirname(qq/$^X/).'/wperl.exe';
+
+        -f $wperlExe
+    or  die "wperl.exe not found.\n\n(Which version of Perl are you using ?)\n";
 
 	# Change potential relative pathes to absolute ones
   $homeDir=abs_path($homeDir);
@@ -71,7 +126,7 @@ sub Init {
 	# Check if wperl and GNU gettext utilities can be run on this system
 	# (--help is a hack for the program to return anyway as they all accept
 	# this switch as a valid one
-	ExecCmd($wperlExe, '--help');
+	ExecCmd("$wperlExe", '--help');
 	ExecCmd("$homeDir/Windows/msgcat.exe", '--help');
 	ExecCmd("$homeDir/Windows/msgfmt.exe", '--help');
 	ExecCmd("$homeDir/Windows/msgunfmt.exe", '--help');
@@ -100,22 +155,6 @@ sub Init {
 }
 
 sub InstallBase {
-
-	# Check if XML::LibXML is installed
-	# if not, try to install it
-			eval "require XML::LibXML"
-  or	do {
-		my($log);
-		print("Adding Perl module XML:LibXML (this may take a while)...");
-		$log=`ppm install XML::LibXML 2>&1`;
-				$?
-		and die "Installation of XML::PelXML module failed:\n\n$log\n";
-		print "done.\n";
-	};
-			eval "require XML::LibXML"
-  or	do {
-		die "Module XML::LibXML still not available despite installation\n";
-	};
 
 	# Copy wperl.exe as perl.exe to the Inkscape directory
 	# to avoid black command window when running
@@ -176,12 +215,27 @@ sub InstallLocales {
 		&$InstallLocale($_);
 		print "done.\n";
 	}
-
 }
 
 sub Remove {
   my(@modules);
   my(@locales);
+
+  my $CleanupPath = sub {
+    my($path);
+
+    eval "require Win32::Env";
+       $@ eq ''
+    or return;
+
+        $^X =~ /\\Inkscape\\Perl5/
+    and do {
+        $path=Win32::Env::GetEnv(0, 'PATH');
+        $path =~ s/;.*?\\Perl5//;
+        Win32::Env::SetEnv(0, 'PATH', $path);
+        Win32::Env::BroadcastEnv();
+    };
+  };
 
   chdir($dstLocale);
   @locales=map { basename($_)."/LC_MESSAGES" } <"$srcLocale/*">;
@@ -200,24 +254,30 @@ sub Remove {
     unlink("./$_");
   }
   remove_tree("./Origami");
-
+	unlink($inkDir.'/perl.exe');
+  &$CleanupPath();
 }
 
 Init();
 
-if (-d $inkExtDir.'/Origami') {
-        Win32::MsgBox("Origami-Ext already installed: do you want to uninstall it?", 36, 'Origami-Ext Installation') == 7
-  and	die "Uninstall aborted.\n";
 
-  Remove();
-  Win32::MsgBox("Uninstall completed.", MB_ICONINFORMATION, 'Origami-Ext Installation');
-
-} else {
-        Win32::MsgBox("Everything looks good, ready to install.\n\nShall we proceed?", 33, 'Origami-Ext Installation') == 2
-  and	die "Installation aborted.\n";
+if ($action eq 'INSTALL') { # Install
+         Win32::MsgBox("Everything looks good, ready to install.\n\nShall we proceed?", 
+                      36, 'Origami-Ext Installation') == 7
+    and die "Installation aborted.\n";
 
   InstallBase();
   InstallLocales();
 
-  Win32::MsgBox("Intallation succeded.", MB_ICONINFORMATION, 'Origami-Ext Installation');
+  $perlpath ne '' and $perlpath ne 'NONE' and SetPerlPath($perlpath); 
+
+  Win32::MsgBox("Intallation completed.", MB_ICONINFORMATION, 'Origami-Ext Installation');
+} else { # Uninstallation
+         Win32::MsgBox("Origami-Ext already installed: do you want to uninstall it?",
+                       36, 'Origami-Ext Installation') == 7
+    and die "Uninstallation aborted.\n";
+
+  Remove();
+
+  Win32::MsgBox("Uninstallation completed.", MB_ICONINFORMATION, 'Origami-Ext Installation');
 }
