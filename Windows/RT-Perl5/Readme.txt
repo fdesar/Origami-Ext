@@ -32,10 +32,12 @@ The way to buid it up again is as follow :
   - run the buid command :
     perldist_strawberry -restorepoints -working_dir="c:\RT-Perl5_build" -image_dir="C:\RT-Perl5" -job <PATH to the RT-Perl5.pp>\RT-Perl5.pp
  
-  - after a looooooooooooong time, you should get in the C:\RT-Perl5_build\ouput a file named RT_Perl5.zip
+  - after a looooooooooooong time, you should get in the C:\RT-Perl5_build\ouput a file named RT_Perl5-5.30.1.1.zip :
+    this will be the RT-Per5.zip file.
 
-  - save the file somewhere, remove c:\RT-Perl5* directories, uninstall the WiX toolser and the Strawberry Perl
-    distribution if you wish to cleanup your system (know that it takes a huge amount of space!).
+  - save the file somewhere, remove c:\RT-Perl5* directories, uninstall Strawberry Perl distribution if you wish to
+    cleanup your system (know that Strawberry Perl and mainly RT-Perl5 & RT-Perl5_build take a huge amount of disk
+    space!).
 
   - That's all, folks.
 
