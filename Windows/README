@@ -1,3 +1,8 @@
+The RT-Perl5 directory incudes a Perl5 runtime for windows so no
+more external perl installation is required. It's entirely been 
+built from the Strawberry Perl project and all sources are available
+(see the Readme.txt file in the directory for more informaations).
+
 The gettext utilities and DLLs packaged here for your convenience
 have been dowloaded from GNUWin32 project from their main site:
 
