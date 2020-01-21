@@ -35,12 +35,9 @@ If no problem occured, a message box telling you the installation
 was successful will pop up and the Inkscape Origami Extension is
 ready to use.
 
-If you encounter any problem, first verify Inkscape, then run
-from a shell the command perl -v to check Perl is up and running
-then try to run the install script again.
-If you are still stuck, note the all the error message(s) and
-contact the author with as much informations as possible on the
-problem at:
+If you encounter any problem, note the all the error message(s)
+and contact the author with as much informations as possible on
+the problem at:
 
  <origami.ext[at]gmail.com>.
 
@@ -72,4 +69,6 @@ Notes:
     environment won't be set when running Inkscape, but it should
     not disturb your use of the portable version, its PATH beeing
     added before the runtime PATH.. Otherwise it will use Strawberry
-    Perl to run and won't install the runtime.
+    Perl to run and won't install the runtime.If you have the
+    standard version (not portable) the runtime will not be
+    necessarry and will not be installed (except the perl.exe wrapper)
