@@ -8,42 +8,16 @@ use File::Copy::Recursive qw/rcopy fmove rmove_glob pathmk pathrmdir/;
 use File::Path qw/remove_tree/;
 
 
-my($wperlExe);
 my($homeDir, $inkDir);
 my($inkExtDir, $srcExtDir, $srcLocale, $dstLocale);
 my($srcPerllibDir, $dstPerllibDir);
 my($ori_ext)='Origami-Ext';
 my($ori_ink)='Origami-Ink';
 my($action);
-my($perlpath)='';
 
 
 $SIG{__DIE__} = sub { $^S and return; Win32::MsgBox(shift, MB_ICONEXCLAMATION, 'Origami-Ext Installation') };
 
-sub SetPerlPath {
-
-        eval { require Win32::Env };
-    not $@
-    and do {
-        my($addpath) = shift;
-        my($path);
-        my($regexp);
-
-        $path = Win32::Env::GetEnv(0, 'PATH'); 
-        $addpath=~s/\\perl(?:.exe)?$//;
-
-        $regexp = $addpath;
-        $regexp =~ s/\\/\\\\/g;
-
-            $path !~ /$regexp/
-        and do {
-            $path =~ s/\s*;$//;
-            $path .= ";$addpath;";
-            Win32::Env::SetEnv(0, 'PATH', $path);
-            Win32::Env::BroadcastEnv();
-        };
-    };
-}
 
 sub ExecCmd {
     my($prg);
@@ -93,14 +67,11 @@ sub Init {
 
     $action=$ARGV[0];
 
-    defined($ARGV[1]) and $perlpath=$ARGV[1];
-
-
     $homeDir=dirname(abs_path(__FILE__));
     $homeDir=~s|[/\/][^/\/]+$||;
 
         -f $homeDir.'/Windows/'.basename(__FILE__)
-    or	die "Invalid installation directory:\n\n$ARGV[0]\n";
+    or	die "Invalid installation directory.\n";
 
     # Search Inkscape directory
     for my $path ('C:/Program Files', 'C:/Program Files (x86)') {
@@ -112,21 +83,15 @@ sub Init {
     }
         -d $inkDir
     or	die "Inkscape directory not found.\n(Is Inkscape installed?)\n";
-
-    $wperlExe=dirname(qq/$^X/).'/wperl.exe';
-
-        -f $wperlExe
-    or  die "wperl.exe not found.\n\n(Which version of Perl are you using ?)\n";
-
+ 
 	# Change potential relative pathes to absolute ones
   $homeDir=abs_path($homeDir);
-	$wperlExe=abs_path($wperlExe);
 	$inkDir=abs_path($inkDir);
 
 	# Check if wperl and GNU gettext utilities can be run on this system
 	# (--help is a hack for the program to return anyway as they all accept
 	# this switch as a valid one
-	ExecCmd("$wperlExe", '--help');
+	ExecCmd("wperl", '--help');
 	ExecCmd("$homeDir/Windows/msgcat.exe", '--help');
 	ExecCmd("$homeDir/Windows/msgfmt.exe", '--help');
 	ExecCmd("$homeDir/Windows/msgunfmt.exe", '--help');
@@ -156,9 +121,9 @@ sub Init {
 
 sub InstallBase {
 
-	# Copy wperl.exe as perl.exe to the Inkscape directory
-	# to avoid black command window when running
-	rcopy($wperlExe, $inkDir.'/perl.exe');
+	# Copy the Perl-wrapper so it allways call wperl and if RT-Perl5 is installed
+        # its own wperl. 
+	rcopy("$homeDir/Windows/RT-Perl5/RT-Perl5-wrapper.exe", $inkDir.'/perl.exe');
 
 	# Install extension
 	rcopy($srcExtDir, $inkExtDir.'/Origami');
@@ -221,22 +186,6 @@ sub Remove {
   my(@modules);
   my(@locales);
 
-  my $CleanupPath = sub {
-    my($path);
-
-    eval "require Win32::Env";
-       $@ eq ''
-    or return;
-
-        $^X =~ /\\Inkscape\\Perl5/
-    and do {
-        $path=Win32::Env::GetEnv(0, 'PATH');
-        $path =~ s/;.*?\\Perl5//;
-        Win32::Env::SetEnv(0, 'PATH', $path);
-        Win32::Env::BroadcastEnv();
-    };
-  };
-
   chdir($dstLocale);
   @locales=map { basename($_)."/LC_MESSAGES" } <"$srcLocale/*">;
   for my $locale (@locales) {
@@ -254,12 +203,11 @@ sub Remove {
     unlink("./$_");
   }
   remove_tree("./Origami");
-	unlink($inkDir.'/perl.exe');
-  &$CleanupPath();
+  unlink($inkDir.'/perl.exe');
+  
 }
 
 Init();
-
 
 if ($action eq 'INSTALL') { # Install
          Win32::MsgBox("Everything looks good, ready to install.\n\nShall we proceed?", 
@@ -268,8 +216,6 @@ if ($action eq 'INSTALL') { # Install
 
   InstallBase();
   InstallLocales();
-
-  $perlpath ne '' and $perlpath ne 'NONE' and SetPerlPath($perlpath); 
 
   Win32::MsgBox("Intallation completed.", MB_ICONINFORMATION, 'Origami-Ext Installation');
 } else { # Uninstallation

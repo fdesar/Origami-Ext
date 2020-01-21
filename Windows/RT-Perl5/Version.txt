@@ -1,0 +1,1 @@
+Strawberry Perl 32bits v5.50.1
