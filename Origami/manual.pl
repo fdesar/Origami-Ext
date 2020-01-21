@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+﻿#!/usr/bin/perl
 
 
 #########################################################################
@@ -57,7 +57,7 @@ or do {
 sub ShowPDF {
     my ($url) = @_;
     my $action = {
-        MSWin32 => sub { system 1, qq{start "$url" /b "$url"} },
+        MSWin32 => sub { $url=~s/\//\\/g; qx/explorer.exe "$url"/ },
         darwin  => sub { system qq{open "$url" >/dev/null 2>&1 &} },
     }->{$^O}    || sub { system qq{xdg-open "$url" >/dev/null 2>&1 &} };
     $action->();
