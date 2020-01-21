@@ -1,1 +1,1 @@
-Strawberry Perl 32bits v5.50.1
+Strawberry Perl 32bits v5.30.1.1
