@@ -1,0 +1,68 @@
+
+Intallation on Windows
+----------------------
+
+Tested on Windows 10 Family in a 64bit VirtualBox but will probably
+work on earlier versions of Windows versions (NT, 7-10) on either
+32bit or 64bit systems.
+
+The installation on Windows is fairly simple (as of v0.60).
+
+Prerequisite:
+-------------
+ 
+ - A 32 or 64-bit Windows version (preferably Windows 10 Family)
+ - You must be logging in on an account with Admin rights
+ - Insckape v0.92.2 or later must be installed (mandatory)
+ - the latest uncompressed version of Origami-Ext (>v0.60) (see note 1)
+
+Installation :
+--------------
+
+From the File Explorer, go to the uncompressed Origami-Ext directory,
+right click on the install-windows(.cmd) file, and choose to run it as
+Admin then follow the prompts. When you see a message box popping
+up telling you the installation was successful, the Origami-Ext
+extension is ready to use. 
+
+If you encounter any problem, try to run the install script again.
+If you are still stuck, note all the error message(s) you get and
+contact the author with as much information as possible about your
+installation problem at:
+
+ <origami.ext[at]gmail.com>.
+
+Uninstallation:
+---------------
+
+Run again the install-window(.cmd) file as Admin and it will offer you
+to fully uninstall the Origami-Ext Module. 
+
+Enjoy and happy Origami diagramings!
+
+Notes:
+------
+
+(1) You can download the latest version of Origami-Ext at:
+
+    https://github.com/fdesar/Origami-Ext/releases
+
+(2) If you wish to uninstall Inkscape, it is strongly suggested
+    to uninstall the Origami-Ext module first !
+
+(3) *** ONLY for Perl for Windows users: ***
+
+    Whaterver version of Perl for Windows you are using, Origami-Ext by default
+    installs and use its own Perl5 rutime.
+
+    If you prefer using your own installed Perl version, which should mandatory
+    include the XML::LibXML module, you can run (as Admin) the command file :
+
+       .\Windows\RT-Perl5\usessysperl(.cmd)
+
+     which will switch Origami-Ext to use it instead of it's own runtime which
+     will be removed from the system. 
+
+     Note that if you remove and reinstall Origami-Ext, you'll have to complete
+     this procedure again as it will reinstall its runtime, ignoring your local
+     Perl installation.

@@ -3,12 +3,12 @@
 REM define variables
 REM ================
 
-SET myzip=%~dp0Windows\RT-Perl5\RT-Perl5.zip
+SET myzip="%~dp0Windows\RT-Perl5\RT-Perl5.zip"
 SET path1=C:\Program Files\Inkscape\
 SET path2=C:\Program Files (x86)\Inkscape\
 SET inkdir=NONE
-SET perlexe=NONE
 SET perlpath=NONE
+SET perlexe=NONE
 
 REM Test if sript is run with Admin rights
 REM If not, the abort install.
@@ -51,28 +51,8 @@ IF %inkdir% == NONE (
     GOTO ERROR
 )
 
-REM set perlpath to  %inkdir%\Perl5
-SET perlpath=%inkdir:"=%Perl5
-
-REM Set the origami modules path
-SET origamipath=%inkdir:"=%share\extensions\Origami
-
-REM If RT-Perl5 is available, add it to the PATH
-IF EXIST %perlPath%\perl\bin\perl.exe (
-  PATH=%PATH%;%perlPath%\perl\bin;
-)
-
-REM Check if any Perl (even th RT-Perl5) is available on
-REM system. If yes, do not install the RT 
-REM ==================================================
-
-perl -v >NUL 2>&1 && GOTO :PERLOK
-
-REM Perl5 runtime install
-REM =====================
-
-REM Check if RT-Perl5 zip file is available
-IF NOT EXIST "%myzip%" (
+REM Check if RT-Perl5 zip file is available :
+IF NOT EXIST %myzip% (
     echo:
     echo:
     echo Sorry, the Perl5 runtime was not found :
@@ -89,64 +69,49 @@ IF NOT EXIST "%myzip%" (
     GOTO ERROR
 )
 
-REM Unzip the runtime
-REM echo Installing Perl5 runtime...
+echo Loading: please wait...
 
-echo install RT-Perl5
-%~dp0\Windows\unzip -qo -d "%perlpath%" "%myzip%" || GOTO :ERROR
-echo done
+REM variable setup
+SET perlpath="%inkdir:"=%Perl5"
+SET perlexe="%perlpath:"=%\bin\perl.exe"
 
-REM End of Perl runtime install
-REM ===========================
+REM If runtime unavailable, install it
+IF NOT EXIST %perlpath% (
+    SET action=INSTALL
+    CALL :INSTALL_RUNTIME
+) ELSE (
+    SET action=UNINSTALL
+)
 
-:PERLOK
+SET PATH=%perlPath:"=%\bin;%PATH%;
 
-REM Now we know we have Perl to execute Windows/install-windows.pl
+CALL perl "%~dp0\Windows\install-windows.pl" %action% || GOTO :ERROR
 
-REM If Origami module is present, it is an uninstall
-IF EXIST "%origamipath%" GOTO :UNINSTALL
-
-REM Installation of Origami-Ext
-CALL perl "%~dp0\Windows\install-windows.pl" "INSTALL" || GOTO :SUCCESS
-
-GOTO CLEANUP
-
-REM Uninstallation process
-REM ======================
-
-:UNINSTALL
-
-REM Removal of Origami-Ext
-CALL perl "%~dp0\Windows\install-windows.pl" "UNINSTALL" || GOTO ERROR
-
-
-
-REM Closing script
-REM===============
-
-:SUCCESS
-
-CALL :CLEANUP
-REM exit with success code
+IF %action% == UNINSTALL (
+    CALL :REMOVE_RUNTIME
+)
 EXIT /B 0
 
 :ERROR
-CALL :CLEANUP
-echo:
-echo Sorry, it seems something went wrong during intallation.
-echo:
-PAUSE
-REM exit with error code
-EXIT /B 1
 
-:CLEANUP
-
-REM Removal of RT-Perl5 if installed if Origami not installed
-IF NOT EXIST "%origamipath%" (
-  IF EXIST "%perlpath%" (
-      REM echo Removing Perl5 runtime...
-      rmdir "%perlpath%" /s /q
-      REM echo Done.
-  )
+REM Intallation error : suppress Perl5
+IF %action% == INSTALL (
+    CALL :REMOVE_RUNTIME
 )
-EXIT /B 0
+EXIT /B 1
+    
+:INSTALL_RUNTIME
+REM ECHO installing Perl5 runtime...
+%~dp0\Windows\unzip -qo -d "%perlpath:"=%-TMP" %myzip% || GOTO :ERROR
+MOVE /y "%perlpath:"=%-TMP\perl" %perlpath% >nul
+RD /q "%perlpath:"=%-TMP"
+REM ECHO done.
+EXIT /B
+
+:REMOVE_RUNTIME
+    REM ECHO Remove Perl Runtime...
+    RD /q /s %perlpath%
+    REM ECHO done.
+EXIT /B
+
+

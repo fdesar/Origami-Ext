@@ -6,11 +6,11 @@
 #include <process.h>
 
 #define MAX_SIZE 500
-#define CMD "wperl"
 
 int main(int argc,char *argv[] ) {
   char syspath[MAX_SIZE]="PATH=";
   char perlpath[MAX_SIZE]="";
+  char cmd[MAX_SIZE]="";
   char buf[MAX_SIZE]="";
   char *args[argc+1];
   char *tok=NULL;
@@ -35,11 +35,15 @@ int main(int argc,char *argv[] ) {
 
 // Tester si le repertoire existe
 // et s'il existe, le rajouter au PATH
+// et construire le nom qualidié de l'executable
 
   if(tok != NULL) { // On a trouvé le répertoire Inkscape
-      strcat(perlpath,"Perl5\\perl\\bin");
-      if (dir=opendir(perlpath)) { // Le repertoire Perl5 exite ? Oui, l'ajouter dans PATH
+      strcat(perlpath,"Perl5\\bin");
+      dir=opendir(perlpath);
+      if (dir != NULL) { // Le repertoire Perl5 exite ? Oui, l'ajouter dans PATH
           closedir(dir);
+          strcpy(cmd, perlpath);
+          strcat(cmd,"\\wperl.exe");
           strcat(syspath, getenv("PATH"));
           strcat(syspath, ";");
           strcat(perlpath, ";");
@@ -52,14 +56,14 @@ int main(int argc,char *argv[] ) {
     args[i]=argv[i];
   }
 
-  args[0]=CMD;
+  args[0]="wperl.exe";
   args[argc]=NULL;
 
   fclose(stdin);
 
-  if(spawnvp(P_OVERLAY, CMD, args)<0) {
-    fprintf(stderr,"%s not found: is Perl installed on your system?\n",
-           CMD);
+  if(spawnv(P_OVERLAY, cmd, args)<0) {
+    fprintf(stderr,"%s not found: something went wrong with the Origami-Ext intallation.\n",
+           perlpath);
   }
 
 }

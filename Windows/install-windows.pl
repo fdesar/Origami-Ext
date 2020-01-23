@@ -18,7 +18,6 @@ my($action);
 
 $SIG{__DIE__} = sub { $^S and return; Win32::MsgBox(shift, MB_ICONEXCLAMATION, 'Origami-Ext Installation') };
 
-
 sub ExecCmd {
     my($prg);
     my($cmd);
@@ -40,28 +39,6 @@ sub ExecCmd {
 
 sub Init {
 
-    my $CheckModule = sub {
-      my($module)=shift;
-
-      # Check if $module is installed
-      # if not, Active Perl is probably used : try to install it with ppm
-      eval "require $module";
-      $@ ne '' and do {
-	 my($log);
-	 print("Adding Perl module $module (this may take a while)...");
-	 $log=`ppm install $module 2>&1`;
-	      $?
-	  and die "Installation of $module module failed:\n\n$log\n";
-          print "done.\n";
-          eval "require $module";
-             $@ eq ''
-          or die "Module $module still not available : you're probably not using Active Perl !\n";
-      };
-    };
-
-#    &$CheckModule("Win32::Env");
-    &$CheckModule("XML::LibXML");
-    
         (defined($ARGV[0]) and $ARGV[0] =~ /^(UN)?INSTALL$/)
     or  die("This Perl script must not be run directly : \nRun the script install-windows.cmd instead\n");
 
@@ -121,15 +98,17 @@ sub Init {
 
 sub InstallBase {
 
-	# Copy the Perl-wrapper so it allways call wperl and if RT-Perl5 is installed
-        # its own wperl. 
+	# Copy the Perl-wrapper so it allways call RT-Perl5 wperl.exe
+        # Copy it also as wperl.exe so it will work when Inscapke will change
+        # its call from perl to wperl...
 	rcopy("$homeDir/Windows/RT-Perl5/RT-Perl5-wrapper.exe", $inkDir.'/perl.exe');
+	rcopy("$homeDir/Windows/RT-Perl5/RT-Perl5-wrapper.exe", $inkDir.'/wperl.exe');
 
 	# Install extension
 	rcopy($srcExtDir, $inkExtDir.'/Origami');
 	rmove_glob("$inkExtDir/Origami/*.inx", $inkExtDir);
 
-	print "Origami-Ext base installed.\n";
+	# print "Origami-Ext base installed.\n";
 
 }
 
@@ -176,9 +155,9 @@ sub InstallLocales {
 	for (map {basename($_) } <$srcLocale/*>) {
 				(-f "$srcLocale/$_/$ori_ext.po" and -f "$srcLocale/$_/$ori_ink.po")
 		or	next;
-		print "Installing locale '$_'...";
+		# print "Installing locale '$_'...";
 		&$InstallLocale($_);
-		print "done.\n";
+		# print "done.\n";
 	}
 }
 
@@ -204,7 +183,7 @@ sub Remove {
   }
   remove_tree("./Origami");
   unlink($inkDir.'/perl.exe');
-  
+  unlink($inkDir.'/wperl.exe');
 }
 
 Init();
@@ -226,4 +205,8 @@ if ($action eq 'INSTALL') { # Install
   Remove();
 
   Win32::MsgBox("Uninstallation completed.", MB_ICONINFORMATION, 'Origami-Ext Installation');
+
+
 }
+
+exit(0);
