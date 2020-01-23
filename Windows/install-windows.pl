@@ -89,7 +89,7 @@ sub Init {
 		 -d $srcExtDir
 	or die "directory\n\n$srcExtDir\n\nnot found.\n";
 
-	$srcPerllibDir="$homeDir/perl-libs";
+	$srcPerllibDir="$homeDir/Windows/perl-libs";
 		 -d $srcPerllibDir
 	or die "Directory\n\n$srcPerllibDir\n\nnot found.\n";
 
@@ -144,7 +144,7 @@ sub InstallLocales {
 
 	# As Locale::Gettext is not implemented on Win32 because of lacking libintl DLL
 	# install our own Locale::gettext_basic
-	rcopy("$homeDir/Perl-Libs/*","$inkExtDir/Origami/perllib");
+	rcopy("$homeDir/Windows/Perl-Libs/*","$inkExtDir/Origami/perllib");
 	push(@INC, "$inkExtDir/Origami/perllib");
 	
 	# Check now if Locale::gettext_basic is available
