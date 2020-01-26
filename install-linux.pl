@@ -12,7 +12,7 @@ use Config;
 and die "Sorry, you're not on a Linux system. Aborting installation.\n";
 
     $>
-and die "You must sudo to run this script. Aborting installation.\n";
+and exec("sudo ".__FILE__);
 
 my($ori_ext)='Origami-Ext';
 my($ori_ink)='Origami-Ink';
@@ -47,77 +47,124 @@ sub Prompt {
 
 sub FindExecDir {
   my($prg)=shift;
-  my($dir);
-  my(@path)=split(':',$ENV{PATH});
-
-  for my $path (@path) {
-      -e "$path/$prg"
-    and return $path; # Found
-  }
-  return ''; # Not found
+  my($path);
+  $path = (qx/which $prg 2>\/dev\/null/)[0];
+  $path and $path=~s|/[^/]+$||;
+  return $path; 
 }
 
 sub ExecCmd {
   my($cmd)=shift;
-
-  #  print "$cmd\n";
-  system $cmd;
+  system($cmd);
+  $? and die "Error executing $cmd\n";
 }
 
 sub Prepare {
-  my($aptupdate)=0;
 
-  my $InstModule = sub {
-    my($name)=shift;
-    my($pkg)=shift;
+  my $SetPerms = sub {
+    my($root)=shift;
+    my(@files)=qx/find $root/;
 
-        eval "require $name"
-    or  do {
-          FindExecDir('dpkg')
-      or  die "Perl module $name not installed and your system doen't use dpkg : you'll have to install it yourself. Aborting Installation.\n"; 
+    for my $file (@files) {
+        chomp($file=dirname($file).'/'.basename($file));
+            (-d $file or $file=~/\/install-.+\.(pl|cmd)$/)
+        and do { chmod(0755, $file); next };
+            -f $file
+        and chmod(0644, $file);
+    }
+  };
 
-          Prompt("Perl module $name not installed. Do you want me to install it ? [Y/n] : ","YN") eq 'Y'
-      and do {
-        my($stdout, $err);
+  my $InstallPackages = sub {
+     my(%commands) = ( 
+          'dpkg'   => 'apt-get -qy install',
+          'yum'    => 'yum -qy install',
+          'zypper' => 'zypper install -y',
+     );
+     my(%updates) = ( 
+          'dpkg'   => 'apt -qy update',
+          'yum'    => 'yum -qy update',
+          'zypper' => 'zypper update -y',
+     );
+     my %modules=(
+        'Exec:msgunfmt'        => { dpkg   => 'gettext',
+                                    yum    => 'gettext-tools',
+			                              zypper => 'gettext-tools'},
+        'Perl:Locale::gettext' => { dpkg   => 'liblocale-gettext-perl',
+                                    yum    => 'perl-Locale-gettext',
+			                              zypper => 'perl-gettext '},
+        'Perl:XML::LibXML',       { dpkg   => 'libxml-libxml-perl',
+                                    yum    => 'perl-XML-LibXML',
+			                              zypper => 'perl-XML-LibXML'},
+        
+     );
+     my $packager="";
+     my $doUpdate=1;
 
-              $aptupdate
-        or  do {
-          print "Doing apt-update... ";
-          $stdout=`apt-get update 2>&1`;
-              ($?>>8) != 0
-          and die "failed: \n$stdout\n\nAborting installation.\n";
-          ++$aptupdate;
-          print "done.\n";
-        };
+     for (keys(%commands)) {
+             FindExecDir($_)
+         and do {
+             $packager = $_;
+             last;
+         };
+     }
 
-        print "Installing or updating package: '$pkg'... ";
+     for my $modname (keys(%modules)) {
+        my($modtype);
+        $modname =~ /^([^:]+):(.+)$/;
+        ($modtype, $modname) = ($1, $2);
 
-        $stdout=`apt-get -qy install $pkg 2>&1`;
-            ($?>>8) != 0
-        and die "failed: \n$stdout\n\nAborting installation.\n";
+            $modtype =~ /^(Perl|Exec)$/
+        or  die "Programming error in module tables!\n";
 
-        print "done.\n";
-   
-      };
+             (    ($modtype eq 'Exec' and FindExecDir($modname))
+              or  ($modtype eq 'Perl' and eval "require $modname"))
+	       and  next;
 
-          eval "require $name"
-      or  die "Perl module $name not availaible. Aborting installation.\n";
-    };
+	          $packager
+         or die sprintf("\nMissing perl Module(s) (%s) on your system and no known packagea found to install them.\n\n",
+	                join(', ', map { $_ =~ s/^[^:]+://; $_ } keys(%modules)));
+             $doUpdate
+         and do {
+             $doUpdate=0;
+             printf("\nSome needed Packages are missing on your system:\n\n");
+             my($choice)=Prompt("Do you want me to try to install them for you : (Y)es, (N)o ? [Yn]:",'YN');
+             $choice eq 'N' and die "\nInstallation aborted.\n";
+             printf("\nUpdating package list for $packager (this may take a while)...");
+             system("$updates{$packager} >/dev/null 2>&1");
+             $? and  die "\nUpdating packages failed code $? !\n\n";
+             print "done.\n\n";
+         };
+         printf(qq|Installing Package $modules{"$modtype:$modname"}{$packager}...|);
+         system(qq|$commands{$packager} $modules{"$modtype:$modname"}{$packager} >/dev/null 2>&1|);
+         $? and die qq|Installing package '$modules{"$modtype:$modname"}{$packager}/ failed !\n\n|;
+         print "done.\n\n";
 
+        # Control success !
+             (    ($modtype eq 'Exec' and not FindExecDir($modname))
+              or  ($modtype eq 'Perl' and not eval "require $modname"))
+	       and  die qq|Installing package '$modules{"$modtype:$modname"}{$packager}' failed !\n\n|;
+     }
   };
 
 
       $exedir = FindExecDir('inkscape')
-  or  die "Cannot find inkscape executable in \$PATH : is Inkscape installed ? Aborting installation.\n";
+  or  die "\nCannot find inkscape executable in \$PATH : is Inkscape installed ? Aborting installation.\n";
 
   $extdir = "$exedir/../share/inkscape/extensions";
       -d  $extdir
-  or  die "Something seems wrong : cannot find Inkscape extensions directory!. Aborting installation.)\n";
+  or  die "\nSomething seems wrong : cannot find Inkscape extensions directory!. Aborting installation.)\n";
 
-  &$InstModule("XML::LibXML",'libxml-libxml-perl');
-  &$InstModule("Locale::gettext",'liblocale-gettext-perl');
+      (-d $pwd.'/Origami' and -d $pwd.'/I18n')
+  or  die "\nYou must run the install program from inside its own path !\n";
+
+  # Insure that perms are 644 for files and 755 for directories and executables
+  &$SetPerms($pwd);
+
+  &$InstallPackages();
 }
 
+# Main Origami-Ext installation : should NOT fail as everything must have been checked before !
+#==============================================================================================
 sub Install {
 
     my $InstallExtension = sub {
@@ -154,6 +201,8 @@ sub Install {
 
     };
 
+    printf("\nInstalling Origami-Ext...\n");
+
     my(@locales)=map { substr($_,-2,2) } <$pwd/I18n/locale/*>;
 
     for my $locale (@locales) {
@@ -167,19 +216,20 @@ sub Install {
       or  next;
       &$InstallLocale($locale);
     }
-
-
   };
 
   &$InstallExtension();
   &$InstallLocales();
 
 }
+# End of Origami-Ext install
+#============================
 
 sub Remove {
   my(@locales);
   my(@modules);
 
+  printf("\nRemoving Origami-Ext...\n");
 
   # First, restore inkscape.mo in each locale
   # and delete $ori_ext.po
@@ -211,22 +261,24 @@ Prepare();
 and do {
   my($choice);
 
-  print "Origami-Ext already installed on this computer.\n";
+  print "\nOrigami-Ext already installed on this computer.\n\n";
   $choice=Prompt("What do you want to do : (R)einstall, (S)uppress or (Q)uit ? [r/s/Q]:",'QRS');
     $choice eq 'S'
   and do {
     # Confirm removal
-        Prompt("Are you sure you want to remove the Origami Extension ? [y/N]:", 'NY') eq 'N'
-    and die "Removal of Origami Extension aborted.\n";
+        Prompt("\nAre you sure you want to remove the Origami Extension ? [y/N]:", 'NY') eq 'N'
+    and die "\nRemoval of Origami Extension aborted.\n";
     Remove();
-    print("Origami-Ext has been successfully removed.\n");
+    print("\nOrigami-Ext has been successfully removed.\n\nPress <RETURN>");
+    readline();
     exit(1);
   };
     $choice eq 'R'
   and do {
     Remove();
     Install();
-    print("Origami-Ext has been successfully reinstalled.\n");
+    print("\nOrigami-Ext has been successfully reinstalled.\n\nPress <RETURN>");
+    readline();
     exit(1);
   };
   exit(1);
@@ -234,6 +286,7 @@ and do {
 
 Install();
 
-print "Origami-Ext successfully installed.\n";
+print "\nOrigami-Ext successfully installed.\n\nPress <RETURN>";
+readline();
 
 exit(1);
