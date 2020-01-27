@@ -1,5 +1,6 @@
 #!/usr/bin/perl
 
+
 use strict;
 use warnings;
 use File::Basename;
@@ -7,12 +8,16 @@ use POSIX qw/setlocale LC_MESSAGES/;
 use Cwd qw/abs_path/;
 use Config;
 
+$SIG{__DIE__} = sub { $^S and return; printf "$_[0]\nAborting installation.\n\nPress <RETURN>"; readline() };
 
     $Config{osname} ne 'linux'
-and die "Sorry, you're not on a Linux system. Aborting installation.\n";
+and die "Sorry, you're not on a Linux system.\n";
 
     $>
-and exec("sudo ".__FILE__);
+and do {
+    printf "\nPerforming sudo to execute installation.\n";
+    exec("sudo $^X ".__FILE__);
+};
 
 my($ori_ext)='Origami-Ext';
 my($ori_ink)='Origami-Ink';
@@ -87,7 +92,7 @@ sub Prepare {
      );
      my %modules=(
         'Exec:msgunfmt'        => { dpkg   => 'gettext',
-                                    yum    => 'gettext-tools',
+                                    yum    => 'gettext',
 			                              zypper => 'gettext-tools'},
         'Perl:Locale::gettext' => { dpkg   => 'liblocale-gettext-perl',
                                     yum    => 'perl-Locale-gettext',
@@ -95,9 +100,10 @@ sub Prepare {
         'Perl:XML::LibXML',       { dpkg   => 'libxml-libxml-perl',
                                     yum    => 'perl-XML-LibXML',
 			                              zypper => 'perl-XML-LibXML'},
-        
      );
+
      my $packager="";
+     my(@pkgList)=();
      my $doUpdate=1;
 
      for (keys(%commands)) {
@@ -116,46 +122,61 @@ sub Prepare {
             $modtype =~ /^(Perl|Exec)$/
         or  die "Programming error in module tables!\n";
 
-             (    ($modtype eq 'Exec' and FindExecDir($modname))
-              or  ($modtype eq 'Perl' and eval "require $modname"))
-	       and  next;
+             ($modtype eq 'Exec' and FindExecDir($modname))
+         or  ($modtype eq 'Perl' and eval "require $modname")
+         or  push(@pkgList, $modules{"$modtype:$modname"}{$packager});
+     }
 
-	          $packager
-         or die sprintf("\nMissing perl Module(s) (%s) on your system and no known packagea found to install them.\n\n",
-	                join(', ', map { $_ =~ s/^[^:]+://; $_ } keys(%modules)));
+         @pkgList
+     or  return;
+
+          $packager
+      or die sprintf("\nMissing perl Module(s) on your system and no known packager found to install them:\n\n%s",
+                     join("\n",@pkgList)."\n\n");
+
+     for my $pkg (@pkgList) {
+
              $doUpdate
          and do {
              $doUpdate=0;
-             printf("\nSome needed Packages are missing on your system:\n\n");
-             my($choice)=Prompt("Do you want me to try to install them for you : (Y)es, (N)o ? [Yn]:",'YN');
+             printf("\nSome needed Packages are missing on your system:\n\n--> %s",
+                     join("\n--> ",@pkgList)."\n\n");
+             my($choice)=Prompt("Do you want me to try to install them for you: (Y)es, (N)o ? [Yn]:",'YN');
              $choice eq 'N' and die "\nInstallation aborted.\n";
              printf("\nUpdating package list for $packager (this may take a while)...");
              system("$updates{$packager} >/dev/null 2>&1");
              $? and  die "\nUpdating packages failed code $? !\n\n";
              print "done.\n\n";
          };
-         printf(qq|Installing Package $modules{"$modtype:$modname"}{$packager}...|);
-         system(qq|$commands{$packager} $modules{"$modtype:$modname"}{$packager} >/dev/null 2>&1|);
-         $? and die qq|Installing package '$modules{"$modtype:$modname"}{$packager}/ failed !\n\n|;
+         printf("Installing Package $pkg...");
+         system("$commands{$packager} $pkg >/dev/null 2>&1");
+         $? and die "Installing package $pkg failed !\n\n";
          print "done.\n\n";
-
-        # Control success !
-             (    ($modtype eq 'Exec' and not FindExecDir($modname))
-              or  ($modtype eq 'Perl' and not eval "require $modname"))
-	       and  die qq|Installing package '$modules{"$modtype:$modname"}{$packager}' failed !\n\n|;
      }
+
+     # Control success !
+     for my $modname (keys(%modules)) {
+        my($modtype);
+        $modname =~ /^([^:]+):(.+)$/;
+        ($modtype, $modname) = ($1, $2);
+
+             ($modtype eq 'Exec' and FindExecDir($modname))
+         or  ($modtype eq 'Perl' and eval "require $modname")
+         or  die "\nInstallation of missing package(s) failed\n\n";
+     }
+
   };
 
 
       $exedir = FindExecDir('inkscape')
-  or  die "\nCannot find inkscape executable in \$PATH : is Inkscape installed ? Aborting installation.\n";
+  or  die "\nCannot find inkscape executable: is Inkscape installed ?\n";
 
   $extdir = "$exedir/../share/inkscape/extensions";
       -d  $extdir
-  or  die "\nSomething seems wrong : cannot find Inkscape extensions directory!. Aborting installation.)\n";
+  or  die "\nSomething seems wrong: cannot find Inkscape extensions directory!.\n";
 
       (-d $pwd.'/Origami' and -d $pwd.'/I18n')
-  or  die "\nYou must run the install program from inside its own path !\n";
+  or  die "\nYou must run the install program nside its own path !\n";
 
   # Insure that perms are 644 for files and 755 for directories and executables
   &$SetPerms($pwd);
@@ -163,7 +184,7 @@ sub Prepare {
   &$InstallPackages();
 }
 
-# Main Origami-Ext installation : should NOT fail as everything must have been checked before !
+# Main Origami-Ext installation: should NOT fail as everything must have been checked before !
 #==============================================================================================
 sub Install {
 
@@ -262,7 +283,7 @@ and do {
   my($choice);
 
   print "\nOrigami-Ext already installed on this computer.\n\n";
-  $choice=Prompt("What do you want to do : (R)einstall, (S)uppress or (Q)uit ? [r/s/Q]:",'QRS');
+  $choice=Prompt("What do you want to do: (R)einstall, (S)uppress or (Q)uit ? [r/s/Q]:",'QRS');
     $choice eq 'S'
   and do {
     # Confirm removal
@@ -290,3 +311,5 @@ print "\nOrigami-Ext successfully installed.\n\nPress <RETURN>";
 readline();
 
 exit(1);
+
+# vim: softtabstop=2:tabstop=2:expandtab
