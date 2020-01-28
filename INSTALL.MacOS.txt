@@ -2,24 +2,27 @@
 Installation of the Origami-Ext extension on a MacOS system
 -----------------------------------------------------------
 
-This extension will only works with Inkscape installed from MacPorts or HomeBrew.
-It WON'T install on system where inkscape has been installed as a Mac OS Application.
+The extension will automatically install on system if Inkscape has been installed the
+officially suggested way, using PerlPorts.
 
-On both MacPorts and HomeBrew, the needed library to build the required Perl modules
-should already hav been installed by installing Inkscape.
+Just download the .zip or .tar.gz package from GitHub, uncompress it and cd into the
+Origami-Ext directory created. Then run the Perl script called "install-macos.pl" which
+will sudo for you and then follow the prompts.
 
-You should then use the cpan command line tool to install the two required Perl Modules:
+It will automatically install the required packages from MacPorts if needed (see Note).
 
-  - XML::LibXML
-  - Locale::Gettext
-
-by issuing the commands:
-
-  $ sudo cpan install XML::LibXML
-  $ sudo cpan install Locale::Gettext
-
-then you can run the install-macos.pl script to install the Origami-Ext Inkscape extension.
-
-Beware that your milage may vary...
+When the script is completed, the Origami-Ext is fully operational in your Inkscape.
 
 If you run into troubles, contact the author at <origami.ext@gmail.com>.
+
+In bonus, you will find in the MacOS directory an Automator application called
+"Inkscape.app" you can copy in your Application directory and will make Inkscape as
+easy to use as any other application. The only difference is that it won't appear as
+running in your taskbar butonly in the XQuartz icon you should have in it (if you
+don't, just drag it from the Application folder).
+
+Enjoy and happy diagramming !
+
+Note: if any port package need to be added, the command "port sefupdate" will be issued:
+===== depending on how long you haven't been issuing it, it can really take a very, very
+      long time. Just be patient...
