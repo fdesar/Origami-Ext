@@ -50,3 +50,9 @@ NOTES:
      $ perl -e 'use XML::LibXML'     -> no error message => OK
 
     If Local::gettext loads, the the libintl2 library is available.
+
+
+
+
+
+Tested on High Sierra

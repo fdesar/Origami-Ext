@@ -66,3 +66,8 @@ Notes:
      Note that if you remove and reinstall Origami-Ext, you'll have to complete
      this procedure again as it will reinstall its runtime, ignoring your local
      Perl installation.
+
+
+
+
+Tested on Windows 10
