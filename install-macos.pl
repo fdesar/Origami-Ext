@@ -23,6 +23,7 @@ my($ori_ink)='Origami-Ink';
 my($pwd)=dirname(abs_path(__FILE__));
 my($exedir);
 my($extdir);
+my($version)="Unkown version";
 
 
 sub Prompt {
@@ -239,7 +240,9 @@ Prepare();
 and do {
   my($choice);
 
-  print "\nOrigami-Ext already installed on this computer.\n\n";
+      -e "$extdir/Origami/.version"
+  and $version = qx|cat "$extdir/Origami/.version"|;
+  printf "\nOrigami-Ext (%s) already installed on this computer.\n\n",$version;
   $choice=Prompt("What do you want to do: (R)einstall, (S)uppress or (Q)uit ? [r/s/Q]:",'QRS');
     $choice eq 'S'
   and do {

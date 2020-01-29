@@ -14,6 +14,7 @@ my($srcPerllibDir, $dstPerllibDir);
 my($ori_ext)='Origami-Ext';
 my($ori_ink)='Origami-Ink';
 my($action);
+my($version)="Unkown version";
 
 
 $SIG{__DIE__} = sub { $^S and return; Win32::MsgBox(shift, MB_ICONEXCLAMATION, 'Origami-Ext Installation') };
@@ -198,7 +199,9 @@ if ($action eq 'INSTALL') { # Install
 
   Win32::MsgBox("Intallation completed.", MB_ICONINFORMATION, 'Origami-Ext Installation');
 } else { # Uninstallation
-         Win32::MsgBox("Origami-Ext already installed: do you want to uninstall it?",
+             -e "$inkExtDir/Origami/.version"
+         and $version = qx|type "$inkExtDir\\Origami\\.version"|;
+         Win32::MsgBox(sprintf("Origami-Ext (%s) already installed: do you want to uninstall it?", $version),
                        36, 'Origami-Ext Installation') == 7
     and die "Uninstallation aborted.\n";
 
