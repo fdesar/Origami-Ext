@@ -3,13 +3,13 @@ Installation of the Origami-Ext extension on a MacOS system
 -----------------------------------------------------------
 
 The extension will automatically install on system if Inkscape has been installed the
-officially suggested way, using PerlPorts.
+officially suggested way, using PerlPorts(2).
 
 Just download the .zip or .tar.gz package from GitHub, uncompress it and cd into the
 Origami-Ext directory created. Then run the Perl script called "install-macos.pl" which
 will sudo for you and then follow the prompts.
 
-It will automatically install the required packages from MacPorts if needed (see Note).
+It will automatically install the required packages from MacPorts if needed (1).
 
 When the script is completed, the Origami-Ext is fully operational in your Inkscape.
 
@@ -23,6 +23,30 @@ don't, just drag it from the Application folder).
 
 Enjoy and happy diagramming !
 
-Note: if any port package need to be added, the command "port sefupdate" will be issued:
-===== depending on how long you haven't been issuing it, it can really take a very, very
-      long time. Just be patient...
+NOTES:
+======
+
+(1): if any port package need to be added, the command "port sefupdate" will be issued:
+     depending on how long you haven't been issuing it, it can really take a very, very
+     long time. Just be patient...
+
+(2) For Inskape users not using MacPorts (ie using Homebrew), just make sure the gettext
+    tools (msgfmt, msgunfmt, msgcat and the linintl2 library) and the two Perl modules
+    Locale::gettext and XML::LibXML are available on your system and the install program
+    will work without any problem(3).
+
+    For the Inkscape.app, you can edit it with automator and modify all the PATHes in the
+    shell scrip part to meet your own installation.
+
+(3) To check for msg* tools, run the bash commands:
+
+     $ which msgfmtv  ->  path to msgfmt   => OK
+     $ which msgunfmt ->  path to msgunfmt => OK
+     $ which msgcat   ->  path to msgcat   => OK
+
+    To check Perl modules:
+
+     $ perl -e 'use Locale::gettext' -> no error message => OK
+     $ perl -e 'use XML::LibXML'     -> no error message => OK
+
+    If Local::gettext loads, the the libintl2 library is available.
