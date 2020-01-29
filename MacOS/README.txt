@@ -1,4 +1,6 @@
-Inkscape.app is not the Inscape application!
+
+CAUTION: Inkscape.app is not the Inscape application itself!!!!!
+
 It's a simple automator application wrapper that will make Inkscape behave like
 a standard application you can put in your Application Folder and link to .svg
 documents, drag in your task bar, etc.
