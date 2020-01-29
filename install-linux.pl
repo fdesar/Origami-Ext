@@ -196,6 +196,7 @@ sub Install {
     ExecCmd("cp $pwd/Origami/*.pl $extdir/Origami");
     ExecCmd("cp $pwd/Origami/*.inx $extdir");
     ExecCmd("cp -r $pwd/Origami/Manual $extdir/Origami/Manual");
+    ExecCmd("cp $pwd/Origami/.version $extdir/Origami/.version");
   };
 
   my $InstallLocales = sub {
