@@ -164,7 +164,7 @@ end run</string>
 					<string>export LANG=$1
 shift
 
-PATH="/opt/local/bin:$PATH"
+PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
 for var in "$@" 
 do
@@ -298,7 +298,7 @@ fi
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>490A93E0-2B89-47F4-A1B8-2CE17336454D</key>
+		<key>25F55F84-1C8B-42A9-A0B9-201136BA282C</key>
 		<dict>
 			<key>from</key>
 			<string>C006E2D1-75A3-4DDC-A7C9-67A07994CF92 - C006E2D1-75A3-4DDC-A7C9-67A07994CF92</string>
