@@ -459,9 +459,11 @@ sub Tangent2Point {
   my($r)=[];
   my(@t);
 
-  # b=0 => tg is vertical => one solution a=1, b=0, c=-x)
+  # b=0 => tgs are V+H => two solutions : a=1, b=0, c=-x and a=0, b=-1 and c=y)
       OriMath::IsZero($chi->[0]-$p->[0]*$chi->[3]) # b=0 ?
-  and return [ [ 1, 0, -$p->[0] ] ]; # a=1, b=0, c=-x
+  and return [ [ 1,  0, -$p->[0] ],   # a=1, b= 0, c=-x
+               [ 0, -1,  $p->[1] ] ]; # a=0, b=-1, c=+y
+
 
   @t=OriMath::Solve2( $chi->[0]-$p->[0]*$chi->[3],
                       $chi->[1]-$p->[1]*$chi->[3]-$p->[0]*$chi->[4],
