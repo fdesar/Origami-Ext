@@ -459,7 +459,12 @@ sub Tangent2Point {
   my($r)=[];
   my(@t);
 
-  # b=0 => tgs are V+H => two solutions : a=1, b=0, c=-x and a=0, b=-1 and c=y)
+  # the b of the straight tangent line is equal to $chi->[0]-$p->[0]*$chi->[3]. 
+  # if b=0 then  we are in a very special case : the parameter segment has an angle
+  # of exactly +/-45° or +/- 135° and the point $p is strictly located on the parameter
+  # segment, on the directrix, exactly at the opposite of the focus !
+  # In this case there are two solutions, one strictly vertical and one strictly
+  #  horizontal and their solutions are: a=1, b=0, c=-x and a=0, b=-1 and c=y)
       OriMath::IsZero($chi->[0]-$p->[0]*$chi->[3]) # b=0 ?
   and return [ [ 1,  0, -$p->[0] ],   # a=1, b= 0, c=-x
                [ 0, -1,  $p->[1] ] ]; # a=0, b=-1, c=+y

@@ -26,11 +26,21 @@ Enjoy and happy diagramming !
 NOTES:
 ======
 
-(1): if any port package need to be added, the command "port sefupdate" will be issued:
-     depending on how long you haven't been issuing it, it can really take a very, very
-     long time. Just be patient...
+(1) if any port package need to be added, the command "port sefupdate" will be issued:
+    depending on how long you haven't been issuing it, it can really take a very, very
+    long time. Just be patient...
 
-(2) For Inskape users not using MacPorts (ie using Homebrew), just make sure the gettext
+(2) VERY IMPORTANT: In the Inscape Macports version 0.92.4, there is a significant bug:
+    the module window, even having the focus, won't stay on top! If an error message or
+    if you modify the canevas the module window will goo back of the main window: you'll
+    have to bring it back to the top at each time. If it is because you checked the "Live
+    view" button and a warning or error message is displayed, the module window will
+    keep the focis and prevent you to do any further action until you bring it back
+    to the top an uncheck the "Live preview" button. This is very ennoying but this
+    buggy behaviour doesn't show neither in 0.92.3 or 1.00-Alpha and so won't probably
+    be corrected by the MacPorts team..
+
+(3) For Inskape users not using MacPorts (ie using Homebrew), just make sure the gettext
     tools (msgfmt, msgunfmt, msgcat and the linintl2 library) and the two Perl modules
     Locale::gettext and XML::LibXML are available on your system and the install program
     will work without any problem(3).
@@ -38,7 +48,7 @@ NOTES:
     For the Inkscape.app, you can edit it with automator and modify all the PATHes in the
     shell scrip part to meet your own installation.
 
-(3) To check for msg* tools, run the bash commands:
+(4) To check for msg* tools, run the bash commands:
 
      $ which msgfmtv  ->  path to msgfmt   => OK
      $ which msgunfmt ->  path to msgunfmt => OK
