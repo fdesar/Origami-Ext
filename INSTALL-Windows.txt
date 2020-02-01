@@ -58,7 +58,7 @@ Notes:
     If you prefer using your own installed Perl version, which should mandatory
     include the XML::LibXML module, you can run (as Admin) the command file :
 
-       .\Windows\RT-Perl5\usessysperl(.cmd)
+       .\Windows\RT-Perl5\UsesSysPerl(.cmd)
 
      which will switch Origami-Ext to use it instead of it's own runtime which
      will be removed from the system. 

@@ -65,4 +65,4 @@ NOTES:
 
 
 
-Tested on High Sierra
+Tested on MacOS High Sierra (10.13.6)

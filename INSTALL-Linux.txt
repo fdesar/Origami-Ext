@@ -19,7 +19,7 @@ If you run into troubles, contact the author at <origami.ext@gmail.com>.
 Tested on :
 
 Linux Mint
-Ubuntu
-Fedora
-Suse
+Ubuntu Linux
+Fedora Linux
+Suse Linux Leap
 
